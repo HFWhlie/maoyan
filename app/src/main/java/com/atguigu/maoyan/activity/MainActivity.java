@@ -69,9 +69,10 @@ public class MainActivity extends FragmentActivity {
 
     private void setListener() {
 
-        //默认选中第一个
 
+        //radiobutton的监听
         rg_bottom.setOnCheckedChangeListener(new MyOnCheckedChangeListener());
+        //默认选中第一个
         rg_bottom.check(R.id.rb_movie);
         curFregrament = 0;
         switchFregrament();
