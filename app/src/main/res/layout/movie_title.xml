@@ -41,17 +41,19 @@
             android:orientation="horizontal">
 
             <RadioButton
+                android:textColor="@drawable/rb_color_select"
                 android:id="@+id/rb_hot_show"
                 style="@style/Movie"
                 android:text="热映" />
 
             <RadioButton
-
+                android:textColor="@drawable/rb_color_select"
                 android:id="@+id/rb_stdy_show"
                 style="@style/Movie"
                 android:text="待映" />
 
             <RadioButton
+                android:textColor="@drawable/rb_color_select"
                 android:id="@+id/rb_overseas"
                 style="@style/Movie"
                 android:text="海外" />
