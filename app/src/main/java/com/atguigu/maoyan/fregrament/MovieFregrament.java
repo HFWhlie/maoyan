@@ -25,6 +25,7 @@ import java.util.List;
 
 /**
  * Created by tao on 2016/6/24.
+ * 电影
  */
 public class MovieFregrament extends BaseFregrament {
     private ViewPager movie_viewpager;

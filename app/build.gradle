@@ -26,4 +26,5 @@ dependencies {
     compile project(':okhttputils')
     compile files('libs/gson-2.2.4.jar')
     compile files('libs/glide-3.7.0.jar')
+    compile 'com.android.support:design:23.3.0'
 }
