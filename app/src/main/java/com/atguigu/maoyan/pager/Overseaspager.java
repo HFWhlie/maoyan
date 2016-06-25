@@ -22,8 +22,6 @@ import java.util.List;
 public class Overseaspager extends Basepager {
     private TabLayout tb;
     private ViewPager vp;
-
-
     private View view;
     //页面集合
     private List<BaseFregrament> list;
@@ -46,13 +44,11 @@ public class Overseaspager extends Basepager {
     private void findview() {
         tb = (TabLayout) view.findViewById(R.id.tb);
         vp = (ViewPager) view.findViewById(R.id.vp);
-
     }
 
     @Override
     public void initData() {
         isInitData = true;
-
         //准备数据
         list = new ArrayList();
         list.add(new MeiFregrament(context));

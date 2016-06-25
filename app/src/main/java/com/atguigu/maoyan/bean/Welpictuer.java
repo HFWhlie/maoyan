@@ -4,6 +4,8 @@ import java.util.List;
 
 /**
  * Created by tao on 2016/6/23.
+ * 启动图
+ *
  */
 public class Welpictuer {
 

@@ -15,7 +15,7 @@ public abstract class Basepager {
         this.context = context;
         rootview = initview();
     }
-
+    //判断是否加载过数据
     public boolean isInitData = false;
     public abstract View initview();
 
