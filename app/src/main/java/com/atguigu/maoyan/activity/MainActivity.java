@@ -37,7 +37,6 @@ public class MainActivity extends FragmentActivity {
     private boolean flag = false;
     private Handler handler = new Handler();
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,13 +62,9 @@ public class MainActivity extends FragmentActivity {
         list.add(new CinemaFregrament(context));
         list.add(new FindFregrament(context));
         list.add(new MyFregrament(context));
-
-
     }
 
     private void setListener() {
-
-
         //radiobutton的监听
         rg_bottom.setOnCheckedChangeListener(new MyOnCheckedChangeListener());
         //默认选中第一个
@@ -141,6 +136,7 @@ public class MainActivity extends FragmentActivity {
         if (!flag && keyCode == KeyEvent.KEYCODE_BACK) {
             flag = true;
             Toast toast = Toast.makeText(context, "真的要离我而去吗?", Toast.LENGTH_SHORT);
+            //使toast居中
             toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();
             handler.postDelayed(new Runnable() {
