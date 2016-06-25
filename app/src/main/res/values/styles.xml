@@ -19,13 +19,13 @@
     </style>
     <!--movie页面RadioButton的样式-->
     <style name="Movie">
+        <item name="android:textColor">@drawable/rb_color_select</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:textSize">18sp</item>
         <item name="android:padding">10dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_weight">1</item>
         <item name="android:layout_width">0dp</item>
-        <item name="android:textColor">@android:color/white</item>
         <item name="android:button">@android:color/transparent</item>
     </style>
 

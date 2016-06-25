@@ -16,7 +16,7 @@ public abstract class Basepager {
         rootview = initview();
     }
 
-
+    public boolean isInitData = false;
     public abstract View initview();
 
     public void initData() {

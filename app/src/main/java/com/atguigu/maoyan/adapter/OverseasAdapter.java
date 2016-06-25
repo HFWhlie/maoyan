@@ -4,18 +4,20 @@ import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.atguigu.maoyan.pager.Basepager;
+import com.atguigu.maoyan.fregrament.BaseFregrament;
 
 import java.util.List;
 
 /**
- * Created by tao on 2016/6/24.
+ * Created by tao on 2016/6/25.
  */
-public class Movieadapter extends PagerAdapter {
-    private List<Basepager> list;
+public class OverseasAdapter extends PagerAdapter {
+    private final List<BaseFregrament> list;
+    private String[] arr;
 
-    public Movieadapter(List<Basepager> list) {
+    public OverseasAdapter(List<BaseFregrament> list, String[] arr) {
         this.list = list;
+        this.arr = arr;
     }
 
     @Override
@@ -30,16 +32,22 @@ public class Movieadapter extends PagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-        Basepager basepager = list.get(position);
-        View viewroot = basepager.rootview;
-        //为了节约用户的资源，当点击某项时才加载数据,   监听页面改变时，设置数据
-        container.addView(viewroot);
-        return viewroot;
+        BaseFregrament fregrament = list.get(position);
+        View view = fregrament.initView();
+        container.addView(view);
+        //先不在这个显示数据，为了不消耗用户过多的资源  在页面改变时加载数据
+        return view;
     }
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
 //        super.destroyItem(container, position, object);
         container.removeView((View) object);
+    }
+
+
+    @Override
+    public CharSequence getPageTitle(int position) {
+        return arr[position] ;
     }
 }

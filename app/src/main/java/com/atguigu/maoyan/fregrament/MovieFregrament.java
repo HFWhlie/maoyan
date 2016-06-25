@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
@@ -71,15 +72,14 @@ public class MovieFregrament extends BaseFregrament {
 
     @Override
     public void initData() {
+
+        Log.e("dujianbo", "执行");
         rg_title.check(R.id.rb_hot_show);
         //准备数据
         list = new ArrayList<>();
         list.add(new Hotpager(context));
         list.add(new Stdypager(context));
         list.add(new Overseaspager(context));
-        //设置适配器
-        //默认选中第一项的数据
-//        list.get(0).initData();
         //设置适配器
         adapter = new Movieadapter(list);
         movie_viewpager.setAdapter(adapter);
@@ -89,7 +89,9 @@ public class MovieFregrament extends BaseFregrament {
         iv_whilt.getViewTreeObserver().addOnGlobalLayoutListener(new MyOnGlobalLayoutListener());
         //监听页面改变
         movie_viewpager.addOnPageChangeListener(new MyOnPageChangeListener());
-
+        //默认选中第一项的数据
+        movie_viewpager.setCurrentItem(0);
+        list.get(0).initData();
     }
 
     /**
@@ -136,7 +138,12 @@ public class MovieFregrament extends BaseFregrament {
 
         @Override
         public void onPageSelected(int position) {
+            if (!list.get(position).isInitData) {
+                list.get(position).initData();
+            }
 
+            int id = rg_title.getChildAt(position).getId();
+            rg_title.check(id);
         }
 
         @Override
@@ -144,6 +151,7 @@ public class MovieFregrament extends BaseFregrament {
 
         }
     }
+
     //RadioGroup的点击事件
     private class MyOnCheckedChangeListener implements RadioGroup.OnCheckedChangeListener {
         @Override

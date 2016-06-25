@@ -30,6 +30,7 @@ public class Overseaspager extends Basepager {
     //标题
     private String[] arr = {"美国", "韩国", "日本"};
     private OverseasAdapter adapter;
+    private static int currentPostion = 0;
 
     public Overseaspager(Context context) {
         super(context);
@@ -50,28 +51,33 @@ public class Overseaspager extends Basepager {
 
     @Override
     public void initData() {
-        //准备数据Ri
+        isInitData = true;
+
+        //准备数据
         list = new ArrayList();
         list.add(new MeiFregrament(context));
         list.add(new HanFregrament(context));
         list.add(new RiFregrament(context));
-        //设置titl
+        //设置title
         tb.addTab(tb.newTab().setText(arr[0]));
         tb.addTab(tb.newTab().setText(arr[1]));
         tb.addTab(tb.newTab().setText(arr[2]));
         tb.setTabTextColors(Color.GRAY, Color.RED);
-//        tb.setTabMode(TabLayout.MODE_FIXED);
 
-        adapter = new OverseasAdapter(list, arr);
         //设置适配器
+        adapter = new OverseasAdapter(list, arr);
         vp.setAdapter(adapter);
         //TabLayout与ViewPager关联
         tb.setupWithViewPager(vp);
+
         //设置页面改变的监听
         vp.addOnPageChangeListener(new OnPageChangeListener());
+
         //默认选中第一项
         list.get(0).initData();
+        vp.setCurrentItem(0);
     }
+
 
     private class OnPageChangeListener implements ViewPager.OnPageChangeListener {
         @Override
@@ -83,6 +89,7 @@ public class Overseaspager extends Basepager {
         public void onPageSelected(int position) {
             //当选中这个页面时，加载数据
             list.get(position).initData();
+            currentPostion = position;
         }
 
         @Override

@@ -29,42 +29,42 @@
     </LinearLayout>
 
     <RelativeLayout
+        android:background="@drawable/rg_bg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true">
-
-        <RadioGroup
-            android:id="@+id/rg_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/rg_bg"
-            android:orientation="horizontal">
-
-            <RadioButton
-                android:textColor="@drawable/rb_color_select"
-                android:id="@+id/rb_hot_show"
-                style="@style/Movie"
-                android:text="热映" />
-
-            <RadioButton
-                android:textColor="@drawable/rb_color_select"
-                android:id="@+id/rb_stdy_show"
-                style="@style/Movie"
-                android:text="待映" />
-
-            <RadioButton
-                android:textColor="@drawable/rb_color_select"
-                android:id="@+id/rb_overseas"
-                style="@style/Movie"
-                android:text="海外" />
-
-        </RadioGroup>
 
         <ImageView
             android:id="@+id/iv_whilt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/iv_whilt" />
+
+        <RadioGroup
+            android:id="@+id/rg_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rb_hot_show"
+                style="@style/Movie"
+                android:text="热映"
+                />
+
+            <RadioButton
+                android:id="@+id/rb_stdy_show"
+                style="@style/Movie"
+                android:text="待映"
+                />
+
+            <RadioButton
+                android:id="@+id/rb_overseas"
+                style="@style/Movie"
+                android:text="海外"
+                 />
+
+        </RadioGroup>
     </RelativeLayout>
 
 
