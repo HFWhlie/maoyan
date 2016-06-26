@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 /**
  * Created by tao on 2016/6/24.
+ * 待映
  */
 public class Stdypager extends Basepager {
     private TextView textView;

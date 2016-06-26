@@ -27,10 +27,7 @@ public class HeadAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        if (data != null && data.size() > 0) {
-            return data.size();
-        }
-        return 0;
+        return Integer.MAX_VALUE;
     }
 
     @Override
@@ -46,6 +43,7 @@ public class HeadAdapter extends PagerAdapter {
                 .placeholder(R.drawable.background_icon01)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .error(R.drawable.background_icon01).into(iv);
+        iv.setScaleType(ImageView.ScaleType.FIT_XY);
         container.addView(iv);
         return iv;
     }

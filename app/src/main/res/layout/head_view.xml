@@ -32,7 +32,7 @@
     </LinearLayout>
 
     <android.support.v4.view.ViewPager
-        android:id="@+id/vp_reying_title"
+        android:id="@+id/vp_head"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:background="#22000000">
