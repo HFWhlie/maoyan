@@ -27,7 +27,7 @@ public class HeadAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        return Integer.MAX_VALUE;
+        return 100;
     }
 
     @Override
@@ -37,7 +37,9 @@ public class HeadAdapter extends PagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-        HotPagerbean.DataBean dataBean = data.get(position);
+
+        int i = position % data.size();
+        HotPagerbean.DataBean dataBean = data.get(i);
         ImageView iv = new ImageView(context);
         Glide.with(context).load(dataBean.getImgUrl())
                 .placeholder(R.drawable.background_icon01)

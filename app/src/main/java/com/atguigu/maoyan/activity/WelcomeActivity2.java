@@ -69,6 +69,9 @@ public class WelcomeActivity2 extends Activity {
                     public void onError(Request request, Exception e) {
                         Log.e("TAG", "onError");
                         Toast.makeText(context,"联网失败",Toast.LENGTH_SHORT).show();
+
+                        startActivity(new Intent(context, MainActivity.class));
+                        finish();
                     }
 
                     /**

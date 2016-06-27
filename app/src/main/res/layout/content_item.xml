@@ -5,6 +5,23 @@
     android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/ll_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/darker_gray"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_month"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="6月30号 周四"
+            android:textColor="@android:color/black" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -22,8 +39,8 @@
                 android:src="@drawable/xianliang" />
 
             <ImageView
-                android:layout_width="25dp"
-                android:layout_height="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/iv_icon"
                 android:layout_alignRight="@+id/iv_icon"
                 android:src="@drawable/a5b" />
@@ -45,20 +62,20 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:singleLine="true"
-                        android:layout_gravity="center"
                         android:id="@+id/tv_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:singleLine="true"
                         android:text="惊天魔盗团2"
                         android:textColor="@android:color/black"
                         android:textSize="18sp" />
 
                     <ImageView
-                        android:layout_gravity="center"
                         android:id="@+id/iv_mode"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_marginLeft="8dp"
                         android:layout_toRightOf="@+id/tv_name"
                         android:src="@drawable/rv" />
@@ -109,15 +126,29 @@
                         android:text="今天151家影院放映2005场" />
                 </LinearLayout>
 
-                <Button
-                    android:id="@+id/bt_mai"
+                <LinearLayout
+                    android:id="@+id/ll_want"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:background="@drawable/bt_color"
-                    android:text="购票"
-                    android:textColor="@drawable/color_select" />
+                    android:orientation="horizontal"
+                    android:padding="6dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@drawable/xihuan_xin" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="想看"
+                        android:textColor="@android:color/holo_red_dark"
+                        android:textSize="18sp" />
+                </LinearLayout>
 
                 <Button
                     android:id="@+id/bt_yu"
@@ -158,7 +189,7 @@
                 android:layout_marginLeft="40dp"
                 android:background="@drawable/tv_orange"
                 android:padding="3dp"
-                android:text="专访"
+                android:text="专题"
                 android:textColor="@android:color/holo_orange_dark" />
 
             <TextView
@@ -169,39 +200,6 @@
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@+id/tv_zhuti"
                 android:text="专访" />
-        </RelativeLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginLeft="80dp"
-            android:layout_marginTop="5dp"
-            android:background="@android:color/darker_gray" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="3dp">
-
-            <TextView
-
-                android:id="@+id/tv_zhuangfang"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="40dp"
-                android:background="@drawable/tv_orange"
-                android:padding="3dp"
-                android:text="主题"
-                android:textColor="@android:color/holo_orange_dark" />
-
-            <TextView
-                android:id="@+id/tv2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@+id/tv_zhuangfang"
-                android:text="主题" />
         </RelativeLayout>
 
     </LinearLayout>

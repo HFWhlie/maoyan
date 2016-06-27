@@ -1,9 +1,11 @@
 package com.atguigu.maoyan.adapter;
 
 import android.support.v4.view.PagerAdapter;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.atguigu.maoyan.bean.Nationbean;
 import com.atguigu.maoyan.fregrament.BaseFregrament;
 
 import java.util.List;
@@ -12,12 +14,14 @@ import java.util.List;
  * Created by tao on 2016/6/25.
  */
 public class OverseasAdapter extends PagerAdapter {
-    private final List<BaseFregrament> list;
-    private String[] arr;
+    private List<BaseFregrament> list;
+    private List<Nationbean.DataBean.AreasBean> arr;
 
-    public OverseasAdapter(List<BaseFregrament> list, String[] arr) {
+
+    public OverseasAdapter(List<BaseFregrament> list, List<Nationbean.DataBean.AreasBean> arr) {
         this.list = list;
         this.arr = arr;
+        Log.e("TAG","arr = "+arr);
     }
 
     @Override
@@ -48,6 +52,6 @@ public class OverseasAdapter extends PagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return arr[position] ;
+        return arr.get(position).getName();
     }
 }

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="8月7号" />
+
+    <RelativeLayout
+        android:background="@android:color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp">
+
+        <ImageView
+            android:id="@+id/iv_item"
+            android:layout_width="60dp"
+            android:layout_height="100dp"
+
+            android:src="@drawable/background_icon01" />
+
+        <ImageView
+
+            android:layout_width="25dp"
+            android:layout_height="30dp"
+            android:src="@drawable/xihuan_cang" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:text="盗墓笔记"
+        android:textColor="@android:color/black" />
+
+</LinearLayout>

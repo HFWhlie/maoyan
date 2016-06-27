@@ -69,50 +69,49 @@ public class HotAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
         if (holder instanceof MyHolder) {
 
-//            int cur = 2;
-//            if (cur == position - 1) {
-//                Hotbean.DataBean.MoviesBean moviesBean = list.get(cur);
-//                //片名
-//                ((MyHolder) holder).tv_name.setText(moviesBean.getNm());
-//                Log.e("TAG", "moviesBean.getNm() = " + moviesBean.getNm());
-//                //描述
-//                ((MyHolder) holder).tv_introduce.setText(moviesBean.getScm());
-//                //多少人
-//                ((MyHolder) holder).tv_people.setText(moviesBean.getShowInfo());
-//
-//                if (moviesBean.getPreSale() == 0) {
-//                    ((MyHolder) holder).bt_mai.setVisibility(View.VISIBLE);
-//                    ((MyHolder) holder).bt_yu.setVisibility(View.GONE);
-//                    ((MyHolder) holder).tv_gread.setText(moviesBean.getSc() + "分");
-//                } else if (moviesBean.getPreSale() == 1) {
-//                    ((MyHolder) holder).bt_mai.setVisibility(View.GONE);
-//                    ((MyHolder) holder).bt_yu.setVisibility(View.VISIBLE);
-//                    ((MyHolder) holder).tv_gread.setText(moviesBean.getWish() + "人想看");
-//                }
-//                if (!moviesBean.isValue3d()) {
-//                    ((MyHolder) holder).iv_mode.setVisibility(View.GONE);
-//                } else {
-//                    ((MyHolder) holder).iv_mode.setVisibility(View.VISIBLE);
-//                }
-//                if (!moviesBean.isImax()) {
-//                    ((MyHolder) holder).iv_max.setVisibility(View.GONE);
-//                } else {
-//                    ((MyHolder) holder).iv_max.setVisibility(View.VISIBLE);
-//                }
-//                //请求图片
-//                Glide.with(context).load(moviesBean.getImg())
-//                        .diskCacheStrategy(DiskCacheStrategy.ALL)//图片的缓存
-//                        .placeholder(R.drawable.background_icon01)//加载过程中的图片
-//                        .error(R.drawable.background_icon01)//加载失败的时候显示的图片
-//                        .into(((MyHolder) holder).iv_icon);//请求成功后把图片设置到的控件
-//
-//
-//                ((MyHolder) holder).ll_zhuan.setVisibility(View.VISIBLE);
-//                ((MyHolder) holder).tv1.setText("绿巨人：周杰伦真的很酷！");
-//                ((MyHolder) holder).tv1.setText("如果出第三部你会看吗？");
+            if (position == 1) {
+                Hotbean.DataBean.MoviesBean moviesBean = list.get(position);
+                //片名
+                ((MyHolder) holder).tv_name.setText(moviesBean.getNm());
+                Log.e("TAG", "moviesBean.getNm() = " + moviesBean.getNm());
+                //描述
+                ((MyHolder) holder).tv_introduce.setText(moviesBean.getScm());
+                //多少人
+                ((MyHolder) holder).tv_people.setText(moviesBean.getShowInfo());
 
-//            } else {
-                Hotbean.DataBean.MoviesBean moviesBean = list.get(position-1);
+                if (moviesBean.getPreSale() == 0) {
+                    ((MyHolder) holder).bt_mai.setVisibility(View.VISIBLE);
+                    ((MyHolder) holder).bt_yu.setVisibility(View.GONE);
+                    ((MyHolder) holder).tv_gread.setText(moviesBean.getSc() + "分");
+                } else if (moviesBean.getPreSale() == 1) {
+                    ((MyHolder) holder).bt_mai.setVisibility(View.GONE);
+                    ((MyHolder) holder).bt_yu.setVisibility(View.VISIBLE);
+                    ((MyHolder) holder).tv_gread.setText(moviesBean.getWish() + "人想看");
+                }
+                if (!moviesBean.isValue3d()) {
+                    ((MyHolder) holder).iv_mode.setVisibility(View.GONE);
+                } else {
+                    ((MyHolder) holder).iv_mode.setVisibility(View.VISIBLE);
+                }
+                if (!moviesBean.isImax()) {
+                    ((MyHolder) holder).iv_max.setVisibility(View.GONE);
+                } else {
+                    ((MyHolder) holder).iv_max.setVisibility(View.VISIBLE);
+                }
+                //请求图片
+                Glide.with(context).load(moviesBean.getImg())
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)//图片的缓存
+                        .placeholder(R.drawable.background_icon01)//加载过程中的图片
+                        .error(R.drawable.background_icon01)//加载失败的时候显示的图片
+                        .into(((MyHolder) holder).iv_icon);//请求成功后把图片设置到的控件
+
+
+                ((MyHolder) holder).ll_zhuan.setVisibility(View.VISIBLE);
+                ((MyHolder) holder).tv1.setText("绿巨人：周杰伦真的很酷！");
+                ((MyHolder) holder).tv1.setText("如果出第三部你会看吗？");
+
+            } else {
+                Hotbean.DataBean.MoviesBean moviesBean = list.get(position-2);
                 //片名
                 ((MyHolder) holder).tv_name.setText(moviesBean.getNm());
                 Log.e("TAG", "moviesBean.getNm() = " + moviesBean.getNm());
@@ -149,9 +148,7 @@ public class HotAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
                 ((MyHolder) holder).ll_zhuan.setVisibility(View.GONE);
             }
-
-
-//        }
+        }
 
     }
 
@@ -236,7 +233,7 @@ public class HotAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 }
 
                 @Override
-                public void onResponse(String response) {
+                public void onResponse(final String response) {
                     Log.e("TAG", "联网成功viewpager");
                     //解析并显示数据
                     processPagerData(response);
@@ -249,7 +246,8 @@ public class HotAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             data = hotPagerbean.getData();
             vp_head.setAdapter(new HeadAdapter(context, data));
 
-
+            vp_head.setCurrentItem(50);
+            //轮播图
             //开始循环切换ViewPager
             if (internalHandler == null) {
                 internalHandler = new InternalHandler();
