@@ -274,12 +274,13 @@ public class HotAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
 
         class MyRunable implements Runnable {
-
             @Override
             public void run() {
                 internalHandler.sendEmptyMessage(0);
             }
         }
+
+
     }
 }
 
