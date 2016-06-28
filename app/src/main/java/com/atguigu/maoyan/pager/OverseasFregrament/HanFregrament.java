@@ -54,12 +54,12 @@ public class HanFregrament extends BaseFregrament {
         OkHttpUtils.get().url(hanurl).build().execute(new StringCallback() {
             @Override
             public void onError(Request request, Exception e) {
-                Log.e("TAG", "美国数据请求失败");
+                Log.e("TAG", "韩国数据请求失败");
             }
 
             @Override
             public void onResponse(String response) {
-                Log.e("TAG", "美国数据请求成功");
+                Log.e("TAG", "韩国数据请求成功");
 
                 pressData(response);
             }
