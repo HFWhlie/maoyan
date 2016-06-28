@@ -149,7 +149,6 @@ public class HotAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 ((MyHolder) holder).ll_zhuan.setVisibility(View.GONE);
             }
         }
-
     }
 
     @Override
@@ -181,7 +180,6 @@ public class HotAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         public Button bt_mai;
         public Button bt_yu;
 
-
         public LinearLayout ll_zhuan;
         public TextView tv1;
         public TextView tv2;
@@ -196,14 +194,14 @@ public class HotAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             tv_gread = (TextView) itemView.findViewById(R.id.tv_gread);
             tv_introduce = (TextView) itemView.findViewById(R.id.tv_introduce);
             tv_people = (TextView) itemView.findViewById(R.id.tv_people);
+            tv1 = (TextView) itemView.findViewById(R.id.tv1);
+            tv2 = (TextView) itemView.findViewById(R.id.tv2);
 
             bt_mai = (Button) itemView.findViewById(R.id.bt_mai);
             bt_yu = (Button) itemView.findViewById(R.id.bt_yu);
 
-
             ll_zhuan = (LinearLayout) itemView.findViewById(R.id.ll_zhuan);
-            tv1 = (TextView) itemView.findViewById(R.id.tv1);
-            tv2 = (TextView) itemView.findViewById(R.id.tv2);
+
         }
     }
 
@@ -268,7 +266,7 @@ public class HotAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 int item = (vp_head.getCurrentItem() + 1);
                 vp_head.setCurrentItem(item);
 
-                //重新做任务
+                //重新发消息
                 internalHandler.postDelayed(new MyRunable(), 2000);
             }
         }
@@ -279,8 +277,6 @@ public class HotAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 internalHandler.sendEmptyMessage(0);
             }
         }
-
-
     }
 }
 

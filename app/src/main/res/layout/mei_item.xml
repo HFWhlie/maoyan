@@ -5,10 +5,10 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="10dp">
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -37,39 +37,47 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
+                android:layout_height="wrap_content">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/tv_name"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:singleLine="true"
-                        android:text="惊天魔盗团2"
-                        android:textColor="@android:color/black"
-                        android:textSize="18sp" />
+                        android:layout_gravity="center">
 
-                    <ImageView
-                        android:id="@+id/iv_mode"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="8dp"
-                        android:layout_toRightOf="@+id/tv_name"
-                        android:src="@drawable/rv" />
+                        <TextView
+                            android:id="@+id/tv_name"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:singleLine="true"
+                            android:text="惊天魔盗团2"
+                            android:textColor="@android:color/black"
+                            android:textSize="18sp" />
+                    </LinearLayout>
 
-                    <ImageView
-                        android:id="@+id/iv_max"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_toRightOf="@+id/iv_mode"
-                        android:src="@drawable/sx" />
+                        android:layout_marginLeft="5dp">
+
+                        <ImageView
+                            android:id="@+id/iv_mode"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:src="@drawable/rv" />
+
+                        <ImageView
+                            android:id="@+id/iv_max"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/sx" />
+                    </LinearLayout>
+
                 </LinearLayout>
 
                 <TextView
@@ -78,7 +86,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="13dp"
+                    android:layout_marginRight="3dp"
                     android:text="8.7"
                     android:textColor="@android:color/holo_orange_dark"
                     android:textSize="18sp" />
@@ -94,11 +102,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
+
                     <ImageView
                         android:id="@+id/iv_stdy"
-                        android:src="@drawable/a0s"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/a0s" />
 
                     <TextView
                         android:id="@+id/tv_introduce"
@@ -107,17 +116,16 @@
                         android:text="周董变魔术，敌人挡不住" />
 
                     <TextView
-                        android:singleLine="true"
-                        android:ellipsize="middle"
                         android:id="@+id/tv_people"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
+                        android:ellipsize="middle"
+                        android:singleLine="true"
                         android:text="今天151家影院放映2005场" />
                 </LinearLayout>
 
                 <Button
-                    android:visibility="gone"
                     android:id="@+id/bt_mai"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -125,7 +133,8 @@
                     android:layout_centerVertical="true"
                     android:background="@drawable/bt_color"
                     android:text="购票"
-                    android:textColor="@drawable/color_select" />
+                    android:textColor="@drawable/color_select"
+                    android:visibility="gone" />
 
                 <Button
                     android:id="@+id/bt_yu"
@@ -137,8 +146,8 @@
                     android:text="预售"
                     android:textColor="@drawable/yucolor_select"
                     android:visibility="gone" />
+
                 <LinearLayout
-                    android:visibility="gone"
                     android:id="@+id/ll_want"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -146,7 +155,8 @@
                     android:layout_centerVertical="true"
                     android:background="@drawable/bt_color"
                     android:orientation="horizontal"
-                    android:padding="6dp">
+                    android:padding="3dp"
+                    android:visibility="gone">
 
                     <ImageView
                         android:layout_width="wrap_content"

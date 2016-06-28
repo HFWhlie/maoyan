@@ -98,8 +98,6 @@ public class StdyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             rt = sdf2.format(date);
             ((ContentHolder) holder).tv_month.setText(rt);
 
-            //是否有3D
-
             ((ContentHolder) holder).tv_name.setText(comingBean.getNm());
             ((ContentHolder) holder).tv_gread.setText(comingBean.getWish() + "人想看");
             ((ContentHolder) holder).tv_introduce.setText(comingBean.getScm());

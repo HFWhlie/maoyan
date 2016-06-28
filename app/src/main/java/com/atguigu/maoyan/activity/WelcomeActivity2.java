@@ -3,19 +3,20 @@ package com.atguigu.maoyan.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.Window;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.ScaleAnimation;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.atguigu.maoyan.R;
 import com.atguigu.maoyan.Utils.URL;
-import com.atguigu.maoyan.adapter.MyAdapter;
 import com.atguigu.maoyan.bean.Welpictuer;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -23,9 +24,9 @@ import com.zhy.http.okhttp.callback.StringCallback;
 import okhttp3.Request;
 
 public class WelcomeActivity2 extends Activity {
-    private ViewPager viewpager;
     private String welUrl;
     private Activity context;
+    private ImageView iv_wel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,13 +41,14 @@ public class WelcomeActivity2 extends Activity {
     //初始化数据
     private void findView() {
         context = this;
-        viewpager = (ViewPager) findViewById(R.id.viewpager);
+        iv_wel = (ImageView) findViewById(R.id.iv_wel);
     }
 
     private void initData() {
         welUrl = URL.welUrl;
-//        Log.e("TAG", "welUrl = " + welUrl);
+        Log.e("TAG", "welUrl = " + welUrl);
 //        String json = CashUtils.getString(context, welUrl);
+//        //先从缓存中查找，看是否存在
 //        if (!TextUtils.isEmpty(json)) {
 //            processeData(json);
 //        }
@@ -79,10 +81,11 @@ public class WelcomeActivity2 extends Activity {
                      * @param response
                      */
                     @Override
-                    public void onResponse(final String response) {
+                    public void onResponse(String response) {
                         Log.e("TAG", "onResponse");
                         //缓存
 //                        CashUtils.putString(context, welUrl, response);
+                        //解析并显示数据
                         processeData(response);
                     }
                 });
@@ -94,8 +97,12 @@ public class WelcomeActivity2 extends Activity {
         //得到对象
         Welpictuer welpictuer = new Gson().fromJson(json, Welpictuer.class);
         Welpictuer.PostersBean postersBean = welpictuer.getPosters().get(0);
-        //设置适配器
-        viewpager.setAdapter(new MyAdapter(context, postersBean));
+        Glide.with(context).load(postersBean.getPic())
+                .diskCacheStrategy(DiskCacheStrategy.ALL)//图片的缓存
+                .placeholder(R.drawable.background_icon01)//加载过程中的图片
+                .error(R.drawable.background_icon01)//加载失败的时候显示的图片
+                .into(iv_wel);//请求成功后把图片设置到的控件
+        //设置动画
         statAnimation();
     }
 
@@ -113,14 +120,17 @@ public class WelcomeActivity2 extends Activity {
         as.addAnimation(sa);
         as.setDuration(2000);
         as.setFillAfter(true);
-        viewpager.startAnimation(as);
+        iv_wel.startAnimation(as);
         //动画的监听
         as.setAnimationListener(new MyAnimationListener());
 
     }
 
     private class MyAnimationListener implements Animation.AnimationListener {
-        //动画开始回调的方法
+        /**
+         * 动画开始回调的方法
+         * @param animation
+         */
         @Override
         public void onAnimationStart(Animation animation) {
 
