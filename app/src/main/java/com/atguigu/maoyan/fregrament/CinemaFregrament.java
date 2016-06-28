@@ -6,6 +6,9 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import com.atguigu.maoyan.R;
@@ -26,6 +29,9 @@ public class CinemaFregrament extends BaseFregrament {
 
     private View view;
     private RecyclerView rl_cinema;
+    private ProgressBar pb;
+    private ImageView iv_pb;
+    private LinearLayout ll_show;
     //影院接口
     private String cinemaurl;
     private CinemaAdapter adapter;
@@ -40,12 +46,25 @@ public class CinemaFregrament extends BaseFregrament {
     public View initView() {
         view = View.inflate(context, R.layout.cinema_fregrament, null);
         findView();
+        setlistener();
         return view;
     }
 
     private void findView() {
         rl_cinema = (RecyclerView) view.findViewById(R.id.rl_cinema);
         rl_showadress = (RelativeLayout) view.findViewById(R.id.rl_showadress);
+        pb = (ProgressBar) view.findViewById(R.id.pb);
+        iv_pb = (ImageView) view.findViewById(R.id.iv_pb);
+        ll_show = (LinearLayout) view.findViewById(R.id.ll_show);
+    }
+
+    private void setlistener() {
+        ll_show.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFromNetData();
+            }
+        });
     }
 
     @Override
@@ -58,15 +77,23 @@ public class CinemaFregrament extends BaseFregrament {
      * 联网请求
      */
     private void getFromNetData() {
+        pb.setVisibility(View.VISIBLE);
+        iv_pb.setVisibility(View.VISIBLE);
         OkHttpUtils.get().url(cinemaurl).build().execute(new StringCallback() {
             @Override
             public void onError(Request request, Exception e) {
                 Log.e("TAG", "影院数据请求失败");
+                pb.setVisibility(View.GONE);
+                iv_pb.setVisibility(View.GONE);
+                ll_show.setVisibility(View.VISIBLE);
             }
 
             @Override
             public void onResponse(String response) {
                 Log.e("TAG", "影院数据请求成功");
+                pb.setVisibility(View.GONE);
+                iv_pb.setVisibility(View.GONE);
+                ll_show.setVisibility(View.GONE);
                 pressData(response);
             }
         });
@@ -103,19 +130,17 @@ public class CinemaFregrament extends BaseFregrament {
         rl_cinema.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getAction()){
+                switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
-                        case MotionEvent.ACTION_MOVE:
-                            rl_showadress.setVisibility(View.GONE);
-                            break;
-                        case MotionEvent.ACTION_UP:
-                            rl_showadress.setVisibility(View.VISIBLE);
-                            break;
+                    case MotionEvent.ACTION_MOVE:
+                        rl_showadress.setVisibility(View.GONE);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        rl_showadress.setVisibility(View.VISIBLE);
+                        break;
                 }
                 return false;
             }
         });
     }
-
-
 }

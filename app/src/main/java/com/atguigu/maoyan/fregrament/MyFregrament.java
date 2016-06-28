@@ -43,7 +43,6 @@ public class MyFregrament extends BaseFregrament {
         return view;
     }
 
-
     private void findView() {
         rl_login = (RelativeLayout) view.findViewById(R.id.rl_login);
         rl_want = (RelativeLayout) view.findViewById(R.id.rl_want);

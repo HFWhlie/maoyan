@@ -6,6 +6,9 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
 import com.atguigu.maoyan.R;
 import com.atguigu.maoyan.Utils.URL;
@@ -31,6 +34,9 @@ public class Overseaspager extends Basepager {
     private TabLayout tb;
     private ViewPager vp;
     private View view;
+    private ProgressBar pb;
+    private ImageView iv_pb;
+    private LinearLayout ll_show;
     //页面集合
     private List<BaseFregrament> list;
     private OverseasAdapter adapter;
@@ -54,8 +60,9 @@ public class Overseaspager extends Basepager {
     private void findview() {
         tb = (TabLayout) view.findViewById(R.id.tb);
         vp = (ViewPager) view.findViewById(R.id.vp);
-
-
+        pb = (ProgressBar) view.findViewById(R.id.pb);
+        iv_pb = (ImageView) view.findViewById(R.id.iv_pb);
+        ll_show = (LinearLayout) view.findViewById(R.id.ll_show);
     }
 
     @Override
@@ -69,9 +76,6 @@ public class Overseaspager extends Basepager {
         list.add(new RiFregrament(context));
         //获取头部数据
         getTitleData();
-
-
-
     }
 
     /**
@@ -83,15 +87,22 @@ public class Overseaspager extends Basepager {
     }
 
     private void getFromNetData() {
+        pb.setVisibility(View.VISIBLE);
+        iv_pb.setVisibility(View.VISIBLE);
         OkHttpUtils.get().url(overseastitleurl).build().execute(new StringCallback() {
             @Override
             public void onError(Request request, Exception e) {
                 Log.e("TAG", "获取标题数据失败");
+                pb.setVisibility(View.GONE);
+                iv_pb.setVisibility(View.GONE);
+                ll_show.setVisibility(View.VISIBLE);
             }
 
             @Override
             public void onResponse(String response) {
                 Log.e("TAG", "获取标题数据成功");
+                pb.setVisibility(View.GONE);
+                iv_pb.setVisibility(View.GONE);
                 pressData(response);
             }
         });
@@ -128,7 +139,6 @@ public class Overseaspager extends Basepager {
     private class OnPageChangeListener implements ViewPager.OnPageChangeListener {
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
         }
 
         @Override

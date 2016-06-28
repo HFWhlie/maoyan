@@ -28,4 +28,5 @@ dependencies {
     compile files('libs/glide-3.7.0.jar')
     compile 'com.android.support:design:23.3.0'
     compile project(':xutils')
+    compile project(':MaterialRefreshLayout-library')
 }

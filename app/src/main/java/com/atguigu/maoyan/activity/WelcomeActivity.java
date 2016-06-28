@@ -34,8 +34,8 @@ public class WelcomeActivity extends Activity {
         new Thread(new Runnable() {
             @Override
             public void run() {
+                //启动到欢迎页面2
                 handler.sendEmptyMessageDelayed(TWO,1000);
-
             }
         }).start();
     }

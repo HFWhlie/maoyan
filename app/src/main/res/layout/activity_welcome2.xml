@@ -5,9 +5,8 @@
     android:layout_height="match_parent"
     tools:context="com.atguigu.maoyan.activity.WelcomeActivity2">
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/viewpager"
+    <ImageView
+        android:id="@+id/iv_wel"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/background_icon01" />
+        android:layout_height="match_parent" />
 </RelativeLayout>

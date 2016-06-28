@@ -4,7 +4,6 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
@@ -43,9 +42,6 @@ public class MovieFregrament extends BaseFregrament {
     //两点之间的距离
     private int left;
     private Movieadapter adapter;
-    private Hotpager hotpager;
-    private Stdypager stdypager;
-    private Overseaspager overseaspager;
     //当前页面的viewpager
 
     public MovieFregrament(Context context) {
@@ -73,7 +69,6 @@ public class MovieFregrament extends BaseFregrament {
     @Override
     public void initData() {
 
-        Log.e("dujianbo", "执行");
         rg_title.check(R.id.rb_hot_show);
         //准备数据
         list = new ArrayList<>();
@@ -129,7 +124,6 @@ public class MovieFregrament extends BaseFregrament {
                 rb_overseas.setAlpha(1);
             }
 
-//                iv_red_point.setLeft(instance);
             //得到红点的属性
             RelativeLayout.LayoutParams redParams = (RelativeLayout.LayoutParams) iv_whilt.getLayoutParams();
             redParams.leftMargin = instance;
