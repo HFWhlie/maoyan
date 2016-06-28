@@ -103,6 +103,7 @@ public class Overseaspager extends Basepager {
                 Log.e("TAG", "获取标题数据成功");
                 pb.setVisibility(View.GONE);
                 iv_pb.setVisibility(View.GONE);
+                ll_show.setVisibility(View.VISIBLE);
                 pressData(response);
             }
         });
