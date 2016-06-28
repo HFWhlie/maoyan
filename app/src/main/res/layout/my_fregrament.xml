@@ -8,7 +8,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-
         <!--头部-->
         <RelativeLayout
             android:id="@+id/rl_login"

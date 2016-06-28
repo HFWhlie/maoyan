@@ -1,9 +1,22 @@
 package com.atguigu.maoyan.fregrament;
 
 import android.content.Context;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 
 import com.atguigu.maoyan.R;
+import com.atguigu.maoyan.Utils.URL;
+import com.atguigu.maoyan.adapter.FindAdapter;
+import com.atguigu.maoyan.bean.Findbean;
+import com.google.gson.Gson;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
+
+import java.util.List;
+
+import okhttp3.Request;
 
 /**
  * Created by tao on 2016/6/24.
@@ -12,6 +25,12 @@ import com.atguigu.maoyan.R;
 public class FindFregrament extends BaseFregrament {
     private View view;
 
+    private RecyclerView rl_find;
+    //发现的请求地址
+    private String findurl;
+    private List<Findbean.DataBean.FeedsBean> feeds;
+    private FindAdapter adapter;
+
     public FindFregrament(Context context) {
         super(context);
     }
@@ -19,11 +38,40 @@ public class FindFregrament extends BaseFregrament {
     @Override
     public View initView() {
         view = View.inflate(context, R.layout.find_fregrament,null);
+        findView();
         return view;
+    }
+
+    private void findView() {
+        rl_find = (RecyclerView) view.findViewById(R.id.rl_find);
     }
 
     @Override
     public void initData() {
+        findurl = URL.findurl;
+        getFromNetData();
+    }
 
+    private void getFromNetData() {
+        OkHttpUtils.get().url(findurl).build().execute(new StringCallback() {
+            @Override
+            public void onError(Request request, Exception e) {
+                Log.e("TAG", "发现数据请求失败");
+            }
+
+            @Override
+            public void onResponse(String response) {
+                Log.e("TAG", "发现数据请求成功");
+                pressData(response);
+            }
+        });
+    }
+
+    private void pressData(String response) {
+        Findbean findbean = new Gson().fromJson(response, Findbean.class);
+        feeds = findbean.getData().getFeeds();
+        rl_find.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false));
+        adapter = new FindAdapter(context,feeds);
+        rl_find.setAdapter(adapter);
     }
 }

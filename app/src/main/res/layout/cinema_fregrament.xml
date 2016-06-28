@@ -6,8 +6,35 @@
     <include layout="@layout/cinema_title"/>
 
     <android.support.v7.widget.RecyclerView
+        android:layout_weight="1"
         android:id="@+id/rl_cinema"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="0dp"/>
+    <RelativeLayout
+        android:id="@+id/rl_showadress"
+        android:layout_gravity="center"
+        android:background="#F0F0F0"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/iv_adress"
+            android:src="@drawable/t5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/iv_adress"
+            android:text="北京东城区天安门广场"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+        <ImageView
+            android:layout_marginRight="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/t6"/>
+    </RelativeLayout>
 
 </LinearLayout>

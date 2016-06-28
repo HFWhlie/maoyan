@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.atguigu.maoyan.R;
+import com.atguigu.maoyan.Utils.DistanceUtil;
 import com.atguigu.maoyan.Utils.URL;
 import com.atguigu.maoyan.bean.CinemaPagerbean;
 import com.atguigu.maoyan.bean.Citybean;
@@ -18,6 +19,7 @@ import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import okhttp3.Request;
@@ -28,12 +30,13 @@ import okhttp3.Request;
 public class CinemaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int ONE = 0;
     private static final int TWO = 1;
+    private final List<Citybean.DataBean.changpingquBean> list;
     private Context context;
-    private Citybean.DataBean data;
 
     public CinemaAdapter(Context context, Citybean.DataBean data) {
         this.context =context;
-        this.data = data;
+        this.list = data.getchangpingqu();
+        Log.e("TAG", "List.size =" +list.size());
     }
 
     @Override
@@ -43,7 +46,8 @@ public class CinemaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             return new CinemapagerHolder(view);
         }
         if(viewType == TWO) {
-            return null;
+            View view = View.inflate(context, R.layout.cinema_item, null);
+            return new CinemaHolder(view);
         }
         return null;
     }
@@ -51,13 +55,31 @@ public class CinemaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if(holder instanceof CinemapagerHolder) {
+            if(position == 0)
             ((CinemapagerHolder)holder).setData();
+        }
+        if(holder instanceof CinemaHolder) {
+
+            Citybean.DataBean.changpingquBean changpingquBean = list.get(position - 1);
+
+            ((CinemaHolder)holder).tv_name.setText(changpingquBean.getNm());
+            ((CinemaHolder)holder).tv_price.setText(changpingquBean.getSellPrice()+"");
+            ((CinemaHolder)holder).tv_dress.setText(changpingquBean.getAddr().replace("changpingqu", "昌平区"));
+            //根据经温度 计算距离
+            double lng = changpingquBean.getLng();
+            double lat = changpingquBean.getLat();
+            double distance = DistanceUtil.getDistance(40.107628, 116.386267, lat, lng);
+            String format = new DecimalFormat("#.0").format(distance);
+            //设置距离
+            ((CinemaHolder) holder).tv_length.setText(format + "km");
+
+
         }
     }
 
     @Override
     public int getItemCount() {
-        return 1;
+        return list.size()+1;
     }
 
     @Override
@@ -66,6 +88,24 @@ public class CinemaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             return ONE;
         }
         return TWO;
+    }
+
+    /**
+     * listview的holder
+     */
+    private class CinemaHolder extends RecyclerView.ViewHolder {
+        private TextView tv_name;
+        private TextView tv_price;
+        private TextView tv_dress;
+        private TextView tv_length;
+        public CinemaHolder(View view) {
+            super(view);
+
+            tv_name = (TextView) view.findViewById(R.id.tv_name);
+            tv_price = (TextView) view.findViewById(R.id.tv_price);
+            tv_dress = (TextView) view.findViewById(R.id.tv_dress);
+            tv_length = (TextView) view.findViewById(R.id.tv_length);
+        }
     }
 
     /**
