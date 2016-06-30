@@ -66,7 +66,8 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity android:name=".activity.CityselectorActivity" />
         <activity android:name=".activity.LoginActivity" />
-        <activity android:name=".activity.AllmovActivity"></activity>
+        <activity android:name=".activity.AllmovActivity" />
+        <activity android:name=".activity.KnobActivity"></activity>
     </application>
 
 </manifest>
