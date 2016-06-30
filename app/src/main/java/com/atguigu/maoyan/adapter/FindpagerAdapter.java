@@ -47,6 +47,7 @@ public class FindpagerAdapter extends PagerAdapter {
                 .into(iv);//请求成功后把图片设置到的控件
         iv.setScaleType(ImageView.ScaleType.FIT_XY);
         container.addView(iv);
+
         return iv;
     }
 
@@ -55,4 +56,5 @@ public class FindpagerAdapter extends PagerAdapter {
 //        super.destroyItem(container, position, object);
         container.removeView((View) object);
     }
+
 }

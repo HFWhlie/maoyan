@@ -33,4 +33,13 @@ public class URL {
     public static final String Hotfive = "http://m.maoyan.com/movie/246188?_v_=yes";
     //影院H5页面的链接
     public static final String Stdyfive = "http://m.maoyan.com/showtime/wrap.json？cinemaid=11533&movieid=request";
+    //话题H5页面的链接
+    public static final String Htfive = "http://m.maoyan.com/groups?_v_=yes&f=android&userid=-1&pushToken=7e6bd5fe73912116ed3ca24d473265cc37ad738879f590efaf0a436f905b945b103b4d6d4a8cb7a6cd70f822f26ffff9&cityId=1";
+    //票房H5页面的链接
+    public static final String pffive = "http://m.maoyan.com/newGuide/maoyanpiaofang?f=nohdft";
+    //影库最上面的图片的接口
+    public static final String movurl = "http://api.maoyan.com/mmdb/daily/recommend/latest/list.json?utm_campaign=AmovieBmovieCD-1&movieBundleVersion=6801&utm_source=xiaomi&utm_medium=android&utm_term=6.8.0&utm_content";
+    //热映口碑的接口
+    public static final String praiseurl = "http://api.meituan.com/mmdb/movieboard/fixedboard/7.json?offset=0&limit=10&__vhost=api.maoyan.com&utm_campaign=AmovieBmovieC110189035496448D-1&movieBundleVersion=6801&utm_source=hiapk&utm_medium=android&utm_term=6.8.0&utm_content=000000000000000&ci=1&net=255&dModel=Custom%20Phone%20-%204.3%20-%20API%2018%20-%20768x1280&uuid=2C2C0ECD557F366849954BEF88D0017AC98AD8183EC9108E7D92853C8D3EF972&lat=0.0&lng=0.0&__skck=6a375bce8c66a0dc293860dfa83833ef&__skts=1463727372645&__skua=7e01cf8dd30a179800a7a93979b430b2&__skno=26a19547-c4ad-438f-96af-0feadadba2b0&__skcy=S9pqtpXxrUm%2BgC2THRjoEuUzJoY%3D";
+
 }

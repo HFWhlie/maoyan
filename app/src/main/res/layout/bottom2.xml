@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="热门分类"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="#ffffff">
+
+        <Button
+            android:id="@+id/btn_yingku_donghua"
+            style="@style/yingku_btn"
+            android:text="动画" />
+
+        <Button
+            android:id="@+id/btn_yingku_xiju"
+            style="@style/yingku_btn"
+            android:text="喜剧" />
+
+        <Button
+            android:id="@+id/btn_yingku_kongbu"
+            style="@style/yingku_btn"
+            android:text="恐怖" />
+
+        <Button
+            android:id="@+id/btn_yingku_aiqing"
+            style="@style/yingku_btn"
+            android:text="爱情" />
+
+        <Button
+            android:id="@+id/btn_yingku_kehuan"
+            style="@style/yingku_btn"
+            android:text="科幻" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff">
+
+        <Button
+            android:id="@+id/btn_yingku_dongzuo"
+            style="@style/yingku_btn"
+            android:text="动作" />
+
+        <Button
+            android:id="@+id/btn_yingku_juqing"
+            style="@style/yingku_btn"
+            android:text="剧情" />
+
+        <Button
+            android:id="@+id/btn_yingku_jingsong"
+            style="@style/yingku_btn"
+            android:text="惊悚" />
+
+        <Button
+            android:id="@+id/btn_yingku_zhanzheng"
+            style="@style/yingku_btn"
+            android:text="战争" />
+
+        <Button
+            android:id="@+id/btn_yingku_fanzui"
+            style="@style/yingku_btn"
+            android:text="犯罪" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#ffffff">
+
+        <Button
+            android:id="@+id/btn_yingku_xuanyi"
+            style="@style/yingku_btn"
+            android:text="悬疑" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff">
+
+        <Button
+            android:id="@+id/bt_mei"
+            style="@style/yingku_btn"
+            android:text="美国" />
+
+        <Button
+            android:id="@+id/bt_china"
+            style="@style/yingku_btn"
+            android:text="大陆" />
+
+        <Button
+            android:id="@+id/bt_ri"
+            style="@style/yingku_btn"
+            android:text="日本" />
+
+        <Button
+            android:id="@+id/bt_han"
+            style="@style/yingku_btn"
+            android:text="韩国" />
+
+        <Button
+            android:id="@+id/bt_gt"
+            style="@style/yingku_btn"
+            android:text="港台" />
+    </LinearLayout>
+
+</LinearLayout>

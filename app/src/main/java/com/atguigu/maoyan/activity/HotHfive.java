@@ -31,6 +31,10 @@ public class HotHfive extends Activity implements View.OnClickListener {
     private String hot;
     //待映和影院的H5地址
     private String stdyfive;
+    //话题的H5地址
+    private String htfive;
+    //票房的H5地址
+    private String pffive;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,24 +50,44 @@ public class HotHfive extends Activity implements View.OnClickListener {
 
         int flags = getIntent().getFlags();
         switch (flags){
-            case 1:
+            case 1://热映item的点击事件
                 String value = getIntent().getStringExtra("key");
                 hot = URL.Hotfive;
                 webview.loadUrl(hot);
                 tv_name.setText(value);
                 break;
-            case 2:
+            case 2://待映item的点击事件
                 String stdy = getIntent().getStringExtra("stdy");
                 stdyfive = URL.Stdyfive;
                 webview.loadUrl(stdyfive);
                 tv_name.setText(stdy);
                 break;
-            case 3:
+            case 3://影院item的点击事件
                 String cinemaname = getIntent().getStringExtra("cinema");
                 webview.loadUrl(stdyfive);
                 tv_name.setText(cinemaname);
                 break;
-
+            case 4://话题
+                htfive = URL.Htfive;
+                String find = getIntent().getStringExtra("find");
+                webview.loadUrl(htfive);
+                tv_name.setText(find);
+                iv_collect.setVisibility(View.GONE);
+                break;
+            case 5://资讯
+                htfive = URL.Htfive;
+                String find2 = getIntent().getStringExtra("find2");
+                webview.loadUrl(htfive);
+                tv_name.setText(find2);
+                iv_collect.setVisibility(View.GONE);
+                break;
+            case 6://票房
+                htfive = URL.Htfive;
+                String find3 = getIntent().getStringExtra("find3");
+                pffive = URL.pffive;
+                webview.loadUrl(pffive);
+                tv_name.setText(find3);
+                break;
         }
         settings = webview.getSettings();
         //支持Java

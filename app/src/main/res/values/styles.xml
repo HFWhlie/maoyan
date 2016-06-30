@@ -36,4 +36,14 @@
         <item name="android:maxHeight">60dp</item>
     </style>
 
+    <style name="yingku_btn">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:layout_margin">4dp</item>
+        <item name="android:background">@drawable/btn_yingku_bg_selector</item>
+        <item name="android:layout_height">22dp</item>
+
+    </style>
+
 </resources>
