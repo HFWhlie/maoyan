@@ -2,6 +2,7 @@ package com.atguigu.maoyan.fregrament;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.support.v4.view.ViewPager;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.atguigu.maoyan.R;
+import com.atguigu.maoyan.activity.CityselectorActivity;
 import com.atguigu.maoyan.adapter.Movieadapter;
 import com.atguigu.maoyan.pager.Basepager;
 import com.atguigu.maoyan.pager.Hotpager;
@@ -27,7 +29,7 @@ import java.util.List;
  * Created by tao on 2016/6/24.
  * 电影
  */
-public class MovieFregrament extends BaseFregrament {
+public class MovieFregrament extends BaseFregrament implements View.OnClickListener {
     private ViewPager movie_viewpager;
     private LinearLayout ll_city;
     private TextView tv_city;
@@ -52,7 +54,12 @@ public class MovieFregrament extends BaseFregrament {
     public View initView() {
         view = View.inflate(context, R.layout.movie_fregrament, null);
         findView();
+        setListener();
         return view;
+    }
+
+    private void setListener() {
+        ll_city.setOnClickListener(this);
     }
 
     private void findView() {
@@ -87,6 +94,15 @@ public class MovieFregrament extends BaseFregrament {
         //默认选中第一项的数据
         movie_viewpager.setCurrentItem(0);
         list.get(0).initData();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.ll_city:
+                context.startActivity(new Intent(context,CityselectorActivity.class));
+                break;
+        }
     }
 
     /**

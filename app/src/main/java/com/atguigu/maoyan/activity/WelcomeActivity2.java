@@ -70,7 +70,7 @@ public class WelcomeActivity2 extends Activity {
                     @Override
                     public void onError(Request request, Exception e) {
                         Log.e("TAG", "onError");
-                        Toast.makeText(context,"联网失败",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "联网失败", Toast.LENGTH_SHORT).show();
 
                         startActivity(new Intent(context, MainActivity.class));
                         finish();
@@ -96,14 +96,18 @@ public class WelcomeActivity2 extends Activity {
     private void processeData(String json) {
         //得到对象
         Welpictuer welpictuer = new Gson().fromJson(json, Welpictuer.class);
-        Welpictuer.PostersBean postersBean = welpictuer.getPosters().get(0);
-        Glide.with(context).load(postersBean.getPic())
-                .diskCacheStrategy(DiskCacheStrategy.ALL)//图片的缓存
-                .placeholder(R.drawable.background_icon01)//加载过程中的图片
-                .error(R.drawable.background_icon01)//加载失败的时候显示的图片
-                .into(iv_wel);//请求成功后把图片设置到的控件
-        //设置动画
-        statAnimation();
+        if(welpictuer.getPosters()!= null&&welpictuer.getPosters().size()>0){
+            Welpictuer.PostersBean postersBean = welpictuer.getPosters().get(0);
+            Glide.with(context).load(postersBean.getPic())
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)//图片的缓存
+                    .placeholder(R.drawable.background_icon01)//加载过程中的图片
+                    .error(R.drawable.background_icon01)//加载失败的时候显示的图片
+                    .into(iv_wel);//请求成功后把图片设置到的控件
+            //设置动画
+            statAnimation();
+        }
+        startActivity(new Intent(context, MainActivity.class));
+        finish();
     }
 
     private void statAnimation() {

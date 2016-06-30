@@ -1,6 +1,7 @@
 package com.atguigu.maoyan.pager;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +13,7 @@ import android.widget.ProgressBar;
 
 import com.atguigu.maoyan.R;
 import com.atguigu.maoyan.Utils.URL;
+import com.atguigu.maoyan.activity.HotHfive;
 import com.atguigu.maoyan.adapter.StdyAdapter;
 import com.atguigu.maoyan.bean.Stdybean;
 import com.cjj.MaterialRefreshLayout;
@@ -99,6 +101,7 @@ public class Stdypager extends Basepager {
                 getFromNetData();
             }
         });
+
     }
 
     @Override
@@ -114,6 +117,7 @@ public class Stdypager extends Basepager {
     private void getFromNetData() {
         pb.setVisibility(View.VISIBLE);
         iv_pb.setVisibility(View.VISIBLE);
+        ll_show.setVisibility(View.GONE);
         OkHttpUtils.get().url(stdyPagerurl).build().execute(new StringCallback() {
             @Override
             public void onError(Request request, Exception e) {
@@ -143,5 +147,16 @@ public class Stdypager extends Basepager {
         adapter = new StdyAdapter(context, cominglist);
         rl_refresh.setAdapter(adapter);
 
+        //点击某个item的监听
+        adapter.setOnStdylistener(new StdyAdapter.OnStdylistener() {
+            @Override
+            public void onstdyonclicklistener(Stdybean.DataBean.ComingBean comingBean) {
+                Intent intent = new Intent(context, HotHfive.class);
+                String stdyname = comingBean.getNm();
+                intent.putExtra("stdy", stdyname);
+                intent.setFlags(2);
+                context.startActivity(intent);
+            }
+        });
     }
 }

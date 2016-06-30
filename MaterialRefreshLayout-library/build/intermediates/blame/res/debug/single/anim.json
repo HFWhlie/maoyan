@@ -16,12 +16,12 @@
         "source": "F:\\maoyan\\MaterialRefreshLayout-library\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\anim\\abc_grow_fade_in_from_bottom.xml"
     },
     {
-        "merged": "F:\\maoyan\\MaterialRefreshLayout-library\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_out_bottom.xml",
-        "source": "F:\\maoyan\\MaterialRefreshLayout-library\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\anim\\abc_slide_out_bottom.xml"
-    },
-    {
         "merged": "F:\\maoyan\\MaterialRefreshLayout-library\\build\\intermediates\\res\\merged\\debug\\anim\\abc_popup_exit.xml",
         "source": "F:\\maoyan\\MaterialRefreshLayout-library\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\anim\\abc_popup_exit.xml"
+    },
+    {
+        "merged": "F:\\maoyan\\MaterialRefreshLayout-library\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_out_bottom.xml",
+        "source": "F:\\maoyan\\MaterialRefreshLayout-library\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\anim\\abc_slide_out_bottom.xml"
     },
     {
         "merged": "F:\\maoyan\\MaterialRefreshLayout-library\\build\\intermediates\\res\\merged\\debug\\anim\\abc_fade_in.xml",

@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@android:color/holo_red_light"
-    android:padding="10dp">
+    android:layout_height="60dp"
+    android:background="@android:color/holo_red_light">
 
     <LinearLayout
         android:id="@+id/ll_city"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:orientation="horizontal"
-        android:padding="5dp">
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
         <TextView
+            android:layout_marginLeft="10dp"
             android:id="@+id/tv_city"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:text="城市"
             android:textColor="@android:color/white"
             android:textSize="18sp" />
@@ -24,15 +23,16 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginLeft="3dp"
             android:src="@drawable/show_city01" />
     </LinearLayout>
 
     <RelativeLayout
-        android:background="@drawable/rg_bg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true">
+        android:layout_centerInParent="true"
+        android:background="@drawable/rg_bg">
 
         <ImageView
             android:id="@+id/iv_whilt"
@@ -49,20 +49,17 @@
             <RadioButton
                 android:id="@+id/rb_hot_show"
                 style="@style/Movie"
-                android:text="热映"
-                />
+                android:text="热映" />
 
             <RadioButton
                 android:id="@+id/rb_stdy_show"
                 style="@style/Movie"
-                android:text="待映"
-                />
+                android:text="待映" />
 
             <RadioButton
                 android:id="@+id/rb_overseas"
                 style="@style/Movie"
-                android:text="海外"
-                 />
+                android:text="海外" />
 
         </RadioGroup>
     </RelativeLayout>

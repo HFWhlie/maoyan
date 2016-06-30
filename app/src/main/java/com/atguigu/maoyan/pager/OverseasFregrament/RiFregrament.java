@@ -74,6 +74,7 @@ public class RiFregrament extends BaseFregrament {
     private void getFromNetData() {
         pb.setVisibility(View.VISIBLE);
         iv_pb.setVisibility(View.VISIBLE);
+        ll_show.setVisibility(View.GONE);
         OkHttpUtils.get().url(riurl).build().execute(new StringCallback() {
             @Override
             public void onError(Request request, Exception e) {

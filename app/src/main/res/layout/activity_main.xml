@@ -19,7 +19,6 @@
         android:orientation="horizontal">
 
         <RadioButton
-
             android:id="@+id/rb_movie"
             style="@style/Main"
             android:drawableTop="@drawable/movie_select"

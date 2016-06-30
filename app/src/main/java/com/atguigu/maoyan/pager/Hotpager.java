@@ -1,6 +1,7 @@
 package com.atguigu.maoyan.pager;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +13,7 @@ import android.widget.ProgressBar;
 
 import com.atguigu.maoyan.R;
 import com.atguigu.maoyan.Utils.URL;
+import com.atguigu.maoyan.activity.HotHfive;
 import com.atguigu.maoyan.adapter.HotAdapter;
 import com.atguigu.maoyan.bean.Hotbean;
 import com.cjj.MaterialRefreshLayout;
@@ -113,7 +115,7 @@ public class Hotpager extends Basepager {
     private void getFromNetData() {
         pb.setVisibility(View.VISIBLE);
         iv_pb.setVisibility(View.VISIBLE);
-
+        ll_show.setVisibility(View.GONE);
         OkHttpUtils.get().url(hoturl).build().execute(new StringCallback() {
             @Override
             public void onError(Request request, Exception e) {
@@ -147,5 +149,17 @@ public class Hotpager extends Basepager {
         rl_refresh.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
         adapter = new HotAdapter(context, list);
         rl_refresh.setAdapter(adapter);
+
+        //跳转到H5
+        adapter.setOnClickitemListeren(new HotAdapter.OnClickitemListeren() {
+            @Override
+            public void onclickListener(Hotbean.DataBean.MoviesBean bean) {
+                Intent intent = new Intent(context, HotHfive.class);
+                String nm = bean.getNm();
+                intent.putExtra("key",nm);
+                intent.setFlags(1);
+                context.startActivity(intent);
+            }
+        });
     }
 }

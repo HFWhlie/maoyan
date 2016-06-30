@@ -1,6 +1,7 @@
 package com.atguigu.maoyan.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.atguigu.maoyan.R;
+import com.atguigu.maoyan.activity.SousuoActivity;
 import com.atguigu.maoyan.bean.Stdybean;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -30,6 +32,7 @@ public class StdyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     //listview集合
     private List<Stdybean.DataBean.ComingBean> list;
     private Context context;
+    private Stdybean.DataBean.ComingBean comingBean;
 
     public StdyAdapter(Context context, List<Stdybean.DataBean.ComingBean> cominglist) {
         this.context = context;
@@ -70,8 +73,7 @@ public class StdyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
 
         if (holder instanceof ContentHolder) {
-            Stdybean.DataBean.ComingBean comingBean = list.get(position-1);
-
+            comingBean = list.get(position-1);
 
             //是否显示标题
             String rt = comingBean.getRt();
@@ -159,10 +161,6 @@ public class StdyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         public Button bt_yu;
 
-
-
-
-
         public ContentHolder(View itemView) {
             super(itemView);
             iv_icon = (ImageView) itemView.findViewById(R.id.iv_icon);
@@ -182,10 +180,20 @@ public class StdyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             tv1 = (TextView) itemView.findViewById(R.id.tv1);
             tv_zhuti = (TextView) itemView.findViewById(R.id.tv_zhuti);
             ll_date = (LinearLayout) itemView.findViewById(R.id.ll_date);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(onStdylistener != null){
+                        onStdylistener.onstdyonclicklistener(comingBean);
+                    }
+                }
+            });
         }
     }
 
     class RefreshHolder extends RecyclerView.ViewHolder {
+        private LinearLayout ll_sousou;
         private RecyclerView rl1;
         private RecyclerView rl2;
 
@@ -193,7 +201,26 @@ public class StdyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             super(view);
             rl1 = (RecyclerView) view.findViewById(R.id.rl1);
             rl2 = (RecyclerView) view.findViewById(R.id.rl2);
+            ll_sousou = (LinearLayout)view.findViewById(R.id.ll_sousou);
+
+            ll_sousou.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    context.startActivity(new Intent(context, SousuoActivity.class));
+                }
+            });
         }
+    }
+
+
+    public interface OnStdylistener{
+        public void onstdyonclicklistener(Stdybean.DataBean.ComingBean comingBean);
+    }
+
+    public OnStdylistener onStdylistener;
+
+    public void setOnStdylistener(OnStdylistener onStdylistener) {
+        this.onStdylistener = onStdylistener;
     }
 }
 

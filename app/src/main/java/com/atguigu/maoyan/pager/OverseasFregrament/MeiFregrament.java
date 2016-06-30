@@ -76,6 +76,7 @@ public class MeiFregrament extends BaseFregrament {
     private void getFromNetData() {
         pb.setVisibility(View.VISIBLE);
         iv_pb.setVisibility(View.VISIBLE);
+        ll_show.setVisibility(View.GONE);
         OkHttpUtils.get().url(meiurl).build().execute(new StringCallback() {
             @Override
             public void onError(Request request, Exception e) {

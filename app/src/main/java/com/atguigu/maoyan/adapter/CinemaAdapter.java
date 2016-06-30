@@ -1,6 +1,7 @@
 package com.atguigu.maoyan.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.ViewPager;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import com.atguigu.maoyan.R;
 import com.atguigu.maoyan.Utils.DistanceUtil;
 import com.atguigu.maoyan.Utils.URL;
+import com.atguigu.maoyan.activity.LoginActivity;
 import com.atguigu.maoyan.bean.CinemaPagerbean;
 import com.atguigu.maoyan.bean.Citybean;
 import com.google.gson.Gson;
@@ -32,6 +34,7 @@ public class CinemaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private static final int TWO = 1;
     private final List<Citybean.DataBean.changpingquBean> list;
     private Context context;
+    private Citybean.DataBean.changpingquBean changpingquBean;
 
     public CinemaAdapter(Context context, Citybean.DataBean data) {
         this.context =context;
@@ -60,7 +63,7 @@ public class CinemaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         }
         if(holder instanceof CinemaHolder) {
 
-            Citybean.DataBean.changpingquBean changpingquBean = list.get(position - 1);
+            changpingquBean = list.get(position - 1);
 
             ((CinemaHolder)holder).tv_name.setText(changpingquBean.getNm());
             ((CinemaHolder)holder).tv_price.setText(changpingquBean.getSellPrice()+"");
@@ -72,7 +75,6 @@ public class CinemaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             String format = new DecimalFormat("#.0").format(distance);
             //设置距离
             ((CinemaHolder) holder).tv_length.setText(format + "km");
-
 
         }
     }
@@ -105,6 +107,15 @@ public class CinemaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             tv_price = (TextView) view.findViewById(R.id.tv_price);
             tv_dress = (TextView) view.findViewById(R.id.tv_dress);
             tv_length = (TextView) view.findViewById(R.id.tv_length);
+
+           view.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View v) {
+                   if(onCinemaitemListener != null){
+                       onCinemaitemListener.onCinemaitemListener(changpingquBean);
+                   }
+               }
+           });
         }
     }
 
@@ -122,6 +133,13 @@ public class CinemaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             super(view);
             tv_login = (TextView) view.findViewById(R.id.tv_login);
             vp_cinema = (ViewPager) view.findViewById(R.id.vp_cinema);
+
+            tv_login.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    context.startActivity(new Intent(context,LoginActivity.class));
+                }
+            });
         }
 
         public void setData() {
@@ -180,5 +198,14 @@ public class CinemaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 initHandler.sendEmptyMessage(0);
             }
         }
+    }
+
+    public interface OnCinemaitemListener{
+        public void onCinemaitemListener(Citybean.DataBean.changpingquBean changpingquBean);
+    }
+    public OnCinemaitemListener onCinemaitemListener;
+
+    public void setOnCinemaitemListener(OnCinemaitemListener onCinemaitemListener) {
+        this.onCinemaitemListener = onCinemaitemListener;
     }
 }

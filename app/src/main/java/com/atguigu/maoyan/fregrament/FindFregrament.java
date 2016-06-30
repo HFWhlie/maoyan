@@ -1,6 +1,7 @@
 package com.atguigu.maoyan.fregrament;
 
 import android.content.Context;
+import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -13,6 +14,8 @@ import com.atguigu.maoyan.R;
 import com.atguigu.maoyan.Utils.URL;
 import com.atguigu.maoyan.adapter.FindAdapter;
 import com.atguigu.maoyan.bean.Findbean;
+import com.cjj.MaterialRefreshLayout;
+import com.cjj.MaterialRefreshListener;
 import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -27,6 +30,7 @@ import okhttp3.Request;
  */
 public class FindFregrament extends BaseFregrament {
     private View view;
+    private MaterialRefreshLayout refresh;
     private RecyclerView rl_find;
     private ProgressBar pb;
     private ImageView iv_pb;
@@ -35,6 +39,7 @@ public class FindFregrament extends BaseFregrament {
     private String findurl;
     private List<Findbean.DataBean.FeedsBean> feeds;
     private FindAdapter adapter;
+    private Handler handler = new Handler();
 
     public FindFregrament(Context context) {
         super(context);
@@ -53,12 +58,39 @@ public class FindFregrament extends BaseFregrament {
         pb = (ProgressBar) view.findViewById(R.id.pb);
         iv_pb = (ImageView) view.findViewById(R.id.iv_pb);
         ll_show = (LinearLayout) view.findViewById(R.id.ll_show);
+        refresh = (MaterialRefreshLayout) view.findViewById(R.id.refresh);
     }
     private void setlistener() {
         ll_show.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getFromNetData();
+            }
+        });
+        refresh.setMaterialRefreshListener(new MaterialRefreshListener() {
+            @Override
+            public void onRefresh(MaterialRefreshLayout materialRefreshLayout) {
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        getFromNetData();
+                        adapter.notifyDataSetChanged();
+                        refresh.finishRefresh();
+                    }
+                }, 2000);
+            }
+
+            @Override
+            public void onRefreshLoadMore(MaterialRefreshLayout materialRefreshLayout) {
+                super.onRefreshLoadMore(materialRefreshLayout);
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        getFromNetData();
+                        adapter.notifyDataSetChanged();
+                        refresh.finishRefreshLoadMore();
+                    }
+                }, 2000);
             }
         });
     }
@@ -75,6 +107,7 @@ public class FindFregrament extends BaseFregrament {
     private void getFromNetData() {
         pb.setVisibility(View.VISIBLE);
         iv_pb.setVisibility(View.VISIBLE);
+        ll_show.setVisibility(View.GONE);
         OkHttpUtils.get().url(findurl).build().execute(new StringCallback() {
             @Override
             public void onError(Request request, Exception e) {

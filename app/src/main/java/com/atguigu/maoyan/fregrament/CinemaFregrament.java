@@ -1,6 +1,7 @@
 package com.atguigu.maoyan.fregrament;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -10,9 +11,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.atguigu.maoyan.R;
 import com.atguigu.maoyan.Utils.URL;
+import com.atguigu.maoyan.activity.HotHfive;
 import com.atguigu.maoyan.adapter.CinemaAdapter;
 import com.atguigu.maoyan.bean.Citybean;
 import com.google.gson.Gson;
@@ -25,7 +28,7 @@ import okhttp3.Request;
  * Created by tao on 2016/6/24.
  * 影院
  */
-public class CinemaFregrament extends BaseFregrament {
+public class CinemaFregrament extends BaseFregrament implements View.OnClickListener {
 
     private View view;
     private RecyclerView rl_cinema;
@@ -37,6 +40,9 @@ public class CinemaFregrament extends BaseFregrament {
     private CinemaAdapter adapter;
 
     private RelativeLayout rl_showadress;
+    private LinearLayout ll_city;
+    private ImageView iv_cityseach;
+    private ImageView iv_seach;
 
     public CinemaFregrament(Context context) {
         super(context);
@@ -55,16 +61,15 @@ public class CinemaFregrament extends BaseFregrament {
         rl_showadress = (RelativeLayout) view.findViewById(R.id.rl_showadress);
         pb = (ProgressBar) view.findViewById(R.id.pb);
         iv_pb = (ImageView) view.findViewById(R.id.iv_pb);
+        iv_cityseach = (ImageView) view.findViewById(R.id.iv_cityseach);
+        iv_seach = (ImageView) view.findViewById(R.id.iv_seach);
+
         ll_show = (LinearLayout) view.findViewById(R.id.ll_show);
+        ll_city = (LinearLayout) view.findViewById(R.id.ll_city);
     }
 
     private void setlistener() {
-        ll_show.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getFromNetData();
-            }
-        });
+        ll_show.setOnClickListener(this);
     }
 
     @Override
@@ -79,6 +84,7 @@ public class CinemaFregrament extends BaseFregrament {
     private void getFromNetData() {
         pb.setVisibility(View.VISIBLE);
         iv_pb.setVisibility(View.VISIBLE);
+        ll_show.setVisibility(View.GONE);
         OkHttpUtils.get().url(cinemaurl).build().execute(new StringCallback() {
             @Override
             public void onError(Request request, Exception e) {
@@ -142,5 +148,36 @@ public class CinemaFregrament extends BaseFregrament {
                 return false;
             }
         });
+
+        adapter.setOnCinemaitemListener(new CinemaAdapter.OnCinemaitemListener() {
+            @Override
+            public void onCinemaitemListener(Citybean.DataBean.changpingquBean changpingquBean) {
+                Intent intent = new Intent(context, HotHfive.class);
+                String cinemaname = changpingquBean.getNm();
+                intent.putExtra("cinema",cinemaname);
+                intent.setFlags(3);
+                context.startActivity(intent);
+            }
+        });
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.ll_show://当联网失败，再次请求
+                getFromNetData();
+                break;
+
+            case R.id.ll_city://城市选择
+                Toast.makeText(context,"城市选择",Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.iv_cityseach://城市搜索
+                Toast.makeText(context,"城市搜索",Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.iv_seach://搜索
+                Toast.makeText(context,"搜索",Toast.LENGTH_SHORT).show();
+                break;
+        }
     }
 }
