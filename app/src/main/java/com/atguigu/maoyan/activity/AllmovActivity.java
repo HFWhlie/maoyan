@@ -32,7 +32,6 @@ import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
-import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -137,7 +136,7 @@ public class AllmovActivity extends Activity {
         tthrheadurl = URL.tthrheadurl;
         //全球电影奖项
         globalurl = URL.globalurl;
-        //全部分类
+        //全部电影奖项
         classifyurl = URL.classifyurl;
         list = new ArrayList();
         list.add(movurl);
@@ -205,7 +204,9 @@ public class AllmovActivity extends Activity {
             Priesabean priesabean = new Gson().fromJson(response, Priesabean.class);
             Priesabean.DataBean data = priesabean.getData();
             tvDescribe1.setText(data.getMovies().get(0).getNm());
-            Glide.with(this).load(data.getMovies().get(0).getImg())
+            String img = data.getMovies().get(0).getImg();
+            String replace = img.replace("w.h", "165.220");
+            Glide.with(this).load(replace)
                     .placeholder(R.drawable.background_icon01)
                     .error(R.drawable.background_icon01)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -216,7 +217,9 @@ public class AllmovActivity extends Activity {
             Expectbean expectbean = new Gson().fromJson(response, Expectbean.class);
             Expectbean.DataBean data = expectbean.getData();
             tvDescribe2.setText(data.getMovies().get(0).getNm());
-            Glide.with(this).load(data.getMovies().get(0).getImg())
+            String img = data.getMovies().get(0).getImg();
+            String replace = img.replace("w.h", "165.220");
+            Glide.with(this).load(replace)
                     .placeholder(R.drawable.background_icon01)
                     .error(R.drawable.background_icon01)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -226,7 +229,9 @@ public class AllmovActivity extends Activity {
             Americabean americabean = new Gson().fromJson(response, Americabean.class);
             Americabean.DataBean data = americabean.getData();
             tvDescribe3.setText(data.getMovies().get(0).getNm());
-            Glide.with(this).load(data.getMovies().get(0).getImg())
+            String img = data.getMovies().get(0).getImg();
+            String replace = img.replace("w.h", "165.220");
+            Glide.with(this).load(replace)
                     .placeholder(R.drawable.background_icon01)
                     .error(R.drawable.background_icon01)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -236,7 +241,9 @@ public class AllmovActivity extends Activity {
             Topbean topbean = new Gson().fromJson(response, Topbean.class);
             Topbean.DataBean data = topbean.getData();
             tvDescribe4.setText(data.getMovies().get(0).getNm());
-            Glide.with(this).load(data.getMovies().get(0).getImg())
+            String img = data.getMovies().get(0).getImg();
+            String replace = img.replace("w.h", "165.220");
+            Glide.with(this).load(replace)
                     .placeholder(R.drawable.background_icon01)
                     .error(R.drawable.background_icon01)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -277,24 +284,23 @@ public class AllmovActivity extends Activity {
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(ivT3);
         }
-        if (i == 8) {
+        if (i == 8) {//全球电影奖项
             Globalbean globalbean = new Gson().fromJson(response, Globalbean.class);
             List<Globalbean.ListBean> list = globalbean.getList();
-            Log.e("TAG","list ===="+list);
+            Log.e("TAG", "list ====" + list);
             recylerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-            adapter = new GlobalAdapter(context,list);
+            adapter = new GlobalAdapter(context, list);
             recylerview.setAdapter(adapter);
         }
 
-        if(i == 9) {
-            Classify classify = new Gson().fromJson(response, Classify.class);
-            final List<Classify.DataBean> data = classify.getData();
+        if (i == 9) {//全部电影奖项
+            final Classify classify = new Gson().fromJson(response, Classify.class);
             ll_allmovie.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(context, KnobActivity.class);
                     Bundle bundle = new Bundle();
-                    bundle.putSerializable("list", (Serializable) data);
+                    bundle.putSerializable("list", classify);
                     intent.putExtras(bundle);
                     context.startActivity(intent);
 

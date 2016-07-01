@@ -2,15 +2,25 @@ package com.atguigu.maoyan.fregrament;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.atguigu.maoyan.R;
@@ -21,6 +31,9 @@ import com.atguigu.maoyan.bean.Citybean;
 import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.Request;
 
@@ -43,6 +56,7 @@ public class CinemaFregrament extends BaseFregrament implements View.OnClickList
     private LinearLayout ll_city;
     private ImageView iv_cityseach;
     private ImageView iv_seach;
+
 
     public CinemaFregrament(Context context) {
         super(context);
@@ -70,6 +84,8 @@ public class CinemaFregrament extends BaseFregrament implements View.OnClickList
 
     private void setlistener() {
         ll_show.setOnClickListener(this);
+        iv_cityseach.setOnClickListener(this);
+        iv_seach.setOnClickListener(this);
     }
 
     @Override
@@ -154,7 +170,7 @@ public class CinemaFregrament extends BaseFregrament implements View.OnClickList
             public void onCinemaitemListener(Citybean.DataBean.changpingquBean changpingquBean) {
                 Intent intent = new Intent(context, HotHfive.class);
                 String cinemaname = changpingquBean.getNm();
-                intent.putExtra("cinema",cinemaname);
+                intent.putExtra("cinema", cinemaname);
                 intent.setFlags(3);
                 context.startActivity(intent);
             }
@@ -163,21 +179,291 @@ public class CinemaFregrament extends BaseFregrament implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.ll_show://当联网失败，再次请求
                 getFromNetData();
                 break;
 
             case R.id.ll_city://城市选择
-                Toast.makeText(context,"城市选择",Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "城市选择", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.iv_cityseach://城市搜索
-                Toast.makeText(context,"城市搜索",Toast.LENGTH_SHORT).show();
+                showpopupWindow();
                 break;
-
             case R.id.iv_seach://搜索
-                Toast.makeText(context,"搜索",Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "搜索", Toast.LENGTH_SHORT).show();
                 break;
         }
+    }
+
+    /**
+     * 显示popupWindow
+     */
+    private void showpopupWindow() {
+
+        final List list = new ArrayList();
+        list.add("行政区");
+        list.add("地铁");
+        list.add("特殊厅");
+        list.add("品牌");
+        list.add("服务");
+        ViewGroup menuView = (ViewGroup) LayoutInflater.from(context).inflate(
+                R.layout.popup, null, true);
+        final ListView lv1 = (ListView) menuView.findViewById(R.id.lv1);
+        final ListView lv2 = (ListView) menuView.findViewById(R.id.lv2);
+        final ListView lv3 = (ListView) menuView.findViewById(R.id.lv3);
+        lv1.setAdapter(new BaseAdapter() {
+
+            TextView tv;
+
+            @Override
+            public int getCount() {
+                return list.size();
+            }
+
+            @Override
+            public Object getItem(int position) {
+                return null;
+            }
+
+            @Override
+            public long getItemId(int position) {
+                return 0;
+            }
+
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                tv = new TextView(context);
+                tv.setText(list.get(position) + "");
+                tv.setHeight(50);
+                tv.setWidth(lv1.getWidth());
+                tv.setGravity(Gravity.CENTER);
+                tv.setTextSize(18);
+                tv.setBackgroundColor(Color.WHITE);
+                return tv;
+            }
+        });
+        final PopupWindow mPop = new PopupWindow(menuView, LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT, true);
+
+
+        // 需要设置一下此参数，点击外边可消失
+        mPop.setBackgroundDrawable(new BitmapDrawable());
+        //设置点击窗口外边窗口消失
+        mPop.setOutsideTouchable(true);
+        // 设置此参数获得焦点，否则无法点击
+        mPop.setFocusable(true);
+
+        mPop.setWidth(rl_cinema.getWidth());
+        mPop.setHeight(800);
+        mPop.showAsDropDown(ll_city, 0, 0);
+
+        lv1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    case 0:
+
+                        final String[] arr0 = {"朝阳", "海淀", "大兴", "东城", "丰台", "西城", "通州", "昌平", "房山", "顺义", "怀柔", "门头沟", "石景", "平谷", "密云", "延庆"};
+                        lv2.setAdapter(new BaseAdapter() {
+                            @Override
+                            public int getCount() {
+                                return arr0.length;
+                            }
+
+                            @Override
+                            public Object getItem(int position) {
+                                return null;
+                            }
+
+                            @Override
+                            public long getItemId(int position) {
+                                return 0;
+                            }
+
+                            @Override
+                            public View getView(int position, View convertView, ViewGroup parent) {
+                                TextView tv0 = new TextView(context);
+                                tv0.setText(arr0[position]);
+                                tv0.setHeight(50);
+                                tv0.setWidth(lv2.getWidth());
+                                tv0.setGravity(Gravity.CENTER);
+                                tv0.setTextSize(18);
+                                tv0.setBackgroundColor(Color.WHITE);
+                                return tv0;
+                            }
+                        });
+                        break;
+                    case 1:
+                        final String[] arr1 = {"1号线", "2号线", "3号线", "4号线", "5号线", "6号线", "7号线", "8号线", "9号线", "10号线", "11号线", "12号线", "13号线", "14号线", "15号线", "八通线"};
+                        lv2.setAdapter(new BaseAdapter() {
+                            @Override
+                            public int getCount() {
+                                return arr1.length;
+                            }
+
+                            @Override
+                            public Object getItem(int position) {
+                                return null;
+                            }
+
+                            @Override
+                            public long getItemId(int position) {
+                                return 0;
+                            }
+
+                            @Override
+                            public View getView(int position, View convertView, ViewGroup parent) {
+                                TextView tv1 = new TextView(context);
+                                tv1.setText(arr1[position]);
+                                tv1.setHeight(50);
+                                tv1.setWidth(lv2.getWidth());
+                                tv1.setGravity(Gravity.CENTER);
+                                tv1.setTextSize(18);
+                                tv1.setBackgroundColor(Color.WHITE);
+                                return tv1;
+                            }
+                        });
+
+                        lv2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                switch (position) {
+                                    case 0:
+                                        final String[] arr5 = {"1号线", "2号线", "3号线", "4号线", "5号线", "6号线", "7号线", "8号线", "9号线", "10号线", "11号线", "12号线", "13号线", "14号线", "15号线", "八通线"};
+                                        lv3.setAdapter(new BaseAdapter() {
+                                            @Override
+                                            public int getCount() {
+                                                return arr5.length;
+                                            }
+
+                                            @Override
+                                            public Object getItem(int position) {
+                                                return null;
+                                            }
+
+                                            @Override
+                                            public long getItemId(int position) {
+                                                return 0;
+                                            }
+
+                                            @Override
+                                            public View getView(int position, View convertView, ViewGroup parent) {
+                                                TextView tv1 = new TextView(context);
+                                                tv1.setText(arr5[position]);
+                                                tv1.setHeight(50);
+                                                tv1.setWidth(lv3.getWidth());
+                                                tv1.setGravity(Gravity.CENTER);
+                                                tv1.setTextSize(18);
+                                                tv1.setBackgroundColor(Color.WHITE);
+                                                return tv1;
+                                            }
+                                        });
+
+                                        break;
+                                }
+                            }
+                        });
+
+                        break;
+                    case 2:
+                        final String[] arr2 = {"杜比全景声厅", "IMAX厅", "4K厅", "中国巨幕厅", "4DX厅", "4D厅", "双机3D厅", "巨幕厅"};
+                        lv2.setAdapter(new BaseAdapter() {
+                            @Override
+                            public int getCount() {
+                                return arr2.length;
+                            }
+
+                            @Override
+                            public Object getItem(int position) {
+                                return null;
+                            }
+
+                            @Override
+                            public long getItemId(int position) {
+                                return 0;
+                            }
+
+                            @Override
+                            public View getView(int position, View convertView, ViewGroup parent) {
+                                TextView tv2 = new TextView(context);
+                                tv2.setText(arr2[position]);
+                                tv2.setHeight(50);
+                                tv2.setWidth(lv2.getWidth());
+                                tv2.setGravity(Gravity.CENTER);
+                                tv2.setTextSize(18);
+                                tv2.setBackgroundColor(Color.WHITE);
+                                return tv2;
+                            }
+                        });
+                        break;
+                    case 3:
+                        final String[] arr3 = {"大地影院", "百汇老影院", "17.5影院", "保利国际影院"};
+                        lv2.setAdapter(new BaseAdapter() {
+                            @Override
+                            public int getCount() {
+                                return arr3.length;
+                            }
+
+                            @Override
+                            public Object getItem(int position) {
+                                return null;
+                            }
+
+                            @Override
+                            public long getItemId(int position) {
+                                return 0;
+                            }
+
+                            @Override
+                            public View getView(int position, View convertView, ViewGroup parent) {
+                                TextView tv3 = new TextView(context);
+                                tv3.setText(arr3[position]);
+                                tv3.setHeight(50);
+                                tv3.setWidth(lv2.getWidth());
+                                tv3.setGravity(Gravity.CENTER);
+                                tv3.setTextSize(18);
+                                tv3.setBackgroundColor(Color.WHITE);
+                                return tv3;
+                            }
+                        });
+
+                        break;
+                    case 4:
+                        final String[] arr4 = {"小吃", "可退票", "可改签", "会员卡"};
+                        lv2.setAdapter(new BaseAdapter() {
+                            @Override
+                            public int getCount() {
+                                return arr4.length;
+                            }
+
+                            @Override
+                            public Object getItem(int position) {
+                                return null;
+                            }
+
+                            @Override
+                            public long getItemId(int position) {
+                                return 0;
+                            }
+
+                            @Override
+                            public View getView(int position, View convertView, ViewGroup parent) {
+                                TextView tv4 = new TextView(context);
+                                tv4.setText(arr4[position]);
+                                tv4.setHeight(50);
+                                tv4.setWidth(lv2.getWidth());
+                                tv4.setGravity(Gravity.CENTER);
+                                tv4.setTextSize(18);
+                                tv4.setBackgroundColor(Color.WHITE);
+                                return tv4;
+                            }
+                        });
+
+                        break;
+                }
+            }
+        });
+
     }
 }

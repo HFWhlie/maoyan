@@ -67,7 +67,8 @@
         <activity android:name=".activity.CityselectorActivity" />
         <activity android:name=".activity.LoginActivity" />
         <activity android:name=".activity.AllmovActivity" />
-        <activity android:name=".activity.KnobActivity"></activity>
+        <activity android:name=".activity.KnobActivity" />
+        <activity android:name=".activity.ShopActivity"></activity>
     </application>
 
 </manifest>

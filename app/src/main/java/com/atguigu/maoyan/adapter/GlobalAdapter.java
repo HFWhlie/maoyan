@@ -37,7 +37,9 @@ public class GlobalAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         Globalbean.ListBean listBean = list.get(position);
         ((GlobalHolder)holder).tv_name.setText(listBean.getNm());
         ((GlobalHolder)holder).tv_konb.setText(listBean.getFra());
-        Glide.with(context).load(listBean.getImg())
+        String img = listBean.getImg();
+        String replace = img.replace("w.h", "165.220");
+        Glide.with(context).load(replace)
                 .placeholder(R.drawable.background_icon01)
                 .error(R.drawable.background_icon01)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
