@@ -18,7 +18,7 @@ import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.onekeyshare.OnekeyShare;
 
 /**
- * 热映H5
+ * 锟斤拷映H5
  */
 public class HotHfive extends Activity implements View.OnClickListener {
     private WebView webview;
@@ -27,14 +27,10 @@ public class HotHfive extends Activity implements View.OnClickListener {
     private ImageView iv_collect;
     private ProgressBar pb_loading;
     private TextView tv_name;
-    //热映H5地址
+    //锟斤拷映H5锟斤拷址
     private String hot;
-    //待映和影院的H5地址
+    //锟斤拷映锟斤拷影院锟斤拷H5锟斤拷址
     private String stdyfive;
-    //话题的H5地址
-    private String htfive;
-    //票房的H5地址
-    private String pffive;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,52 +46,62 @@ public class HotHfive extends Activity implements View.OnClickListener {
 
         int flags = getIntent().getFlags();
         switch (flags){
-            case 1://热映item的点击事件
+            case 1:
                 String value = getIntent().getStringExtra("key");
                 hot = URL.Hotfive;
                 webview.loadUrl(hot);
                 tv_name.setText(value);
                 break;
-            case 2://待映item的点击事件
+            case 2:
                 String stdy = getIntent().getStringExtra("stdy");
                 stdyfive = URL.Stdyfive;
                 webview.loadUrl(stdyfive);
                 tv_name.setText(stdy);
                 break;
-            case 3://影院item的点击事件
+            case 3:
                 String cinemaname = getIntent().getStringExtra("cinema");
                 webview.loadUrl(stdyfive);
                 tv_name.setText(cinemaname);
                 break;
-            case 4://话题
-                htfive = URL.Htfive;
+            case 4:
                 String find = getIntent().getStringExtra("find");
+                String htfive = URL.Htfive;
                 webview.loadUrl(htfive);
                 tv_name.setText(find);
-                iv_collect.setVisibility(View.GONE);
                 break;
-            case 5://资讯
-                htfive = URL.Htfive;
+            case 5:
                 String find2 = getIntent().getStringExtra("find2");
-                webview.loadUrl(htfive);
+                String zxfive = URL.zxfive;
+                webview.loadUrl(zxfive);
                 tv_name.setText(find2);
-                iv_collect.setVisibility(View.GONE);
                 break;
-            case 6://票房
-                htfive = URL.Htfive;
+            case 6:
                 String find3 = getIntent().getStringExtra("find3");
-                pffive = URL.pffive;
+                String pffive = URL.pffive;
                 webview.loadUrl(pffive);
                 tv_name.setText(find3);
                 break;
+            case 7:
+                String privce1url = URL.privce1url;
+                webview.loadUrl(privce1url);
+                break;
+            case 8:
+                String privce2url = URL.privce2url;
+                webview.loadUrl(privce2url);
+                break;
+            case 9:
+                String privce3url = URL.privce3url;
+                webview.loadUrl(privce3url);
+                break;
+
+
         }
         settings = webview.getSettings();
-        //支持Java
+        //支锟斤拷Java
         settings.setJavaScriptEnabled(true);
-        //支持双击变大变小  页面支持才可以
+        //支锟斤拷双锟斤拷锟斤拷锟斤拷小  页锟斤拷支锟街才匡拷锟斤拷
         settings.setUseWideViewPort(true);
-        //添加缩放按钮
-        settings.setBuiltInZoomControls(true);
+        //锟斤拷锟斤拷锟斤拷虐锟脚�        settings.setBuiltInZoomControls(true);
 
         webview.setWebViewClient(new WebViewClient() {
             @Override
@@ -116,37 +122,33 @@ public class HotHfive extends Activity implements View.OnClickListener {
             case R.id.iv_back:
                 finish();
                 break;
-            case R.id.iv_collect://分享
+            case R.id.iv_collect://锟斤拷锟斤拷
                 showShare();
-            break;
+                break;
         }
     }
 
     private void showShare () {
         ShareSDK.initSDK(this);
         OnekeyShare oks = new OnekeyShare();
-        //关闭sso授权
+        //锟截憋拷sso锟斤拷权
         oks.disableSSOWhenAuthorize();
 
-        // 分享时Notification的图标和文字  2.5.9以后的版本不调用此方法
-        //oks.setNotification(R.drawable.ic_launcher, getString(R.string.app_name));
-        // title标题，印象笔记、邮箱、信息、微信、人人网和QQ空间使用
-        oks.setTitle("猫眼电影");
-        // titleUrl是标题的网络链接，仅在人人网和QQ空间使用
+        // 锟斤拷锟斤拷时Notification锟斤拷图锟斤拷锟斤拷锟斤拷锟� 2.5.9锟皆猴拷陌姹撅拷锟斤拷锟斤拷么朔锟斤拷锟�        //oks.setNotification(R.drawable.ic_launcher, getString(R.string.app_name));
+        // title锟斤拷锟解，印锟斤拷始恰锟斤拷锟斤拷洹拷锟较拷锟轿拷拧锟斤拷锟斤拷锟斤拷锟斤拷QQ锟秸硷拷使锟斤拷
+        oks.setTitle("猫锟桔碉拷影");
+        // titleUrl锟角憋拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷樱锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷QQ锟秸硷拷使锟斤拷
         oks.setTitleUrl("http://sharesdk.cn");
-        // text是分享文本，所有平台都需要这个字段
-        oks.setText("我是分享文本");
-        // imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
-        //oks.setImagePath("/sdcard/test.jpg");//确保SDcard下面存在此张图片
-        // url仅在微信（包括好友和朋友圈）中使用
+        // text锟角凤拷锟斤拷锟侥憋拷锟斤拷锟斤拷锟斤拷平台锟斤拷锟斤拷要锟斤拷锟斤拷侄锟�        oks.setText("锟斤拷锟角凤拷锟斤拷锟侥憋拷");
+        // imagePath锟斤拷图片锟侥憋拷锟斤拷路锟斤拷锟斤拷Linked-In锟斤拷锟斤拷锟狡教拷锟街э拷执瞬锟斤拷锟�        //oks.setImagePath("/sdcard/test.jpg");//确锟斤拷SDcard锟斤拷锟斤拷锟斤拷诖锟斤拷锟酵计�        // url锟斤拷锟斤拷微锟脚ｏ拷锟斤拷锟斤拷锟斤拷锟窖猴拷锟斤拷锟斤拷圈锟斤拷锟斤拷使锟斤拷
         oks.setUrl("http://sharesdk.cn");
-        // comment是我对这条分享的评论，仅在人人网和QQ空间使用
-        oks.setComment("我是测试评论文本");
-        // site是分享此内容的网站名称，仅在QQ空间使用
+        // comment锟斤拷锟揭讹拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷郏锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷QQ锟秸硷拷使锟斤拷
+        oks.setComment("锟斤拷锟角诧拷锟斤拷锟斤拷锟斤拷锟侥憋拷");
+        // site锟角凤拷锟斤拷锟斤拷锟斤拷莸锟斤拷锟秸撅拷锟狡ｏ拷锟斤拷锟斤拷QQ锟秸硷拷使锟斤拷
         oks.setSite(getString(R.string.app_name));
-        // siteUrl是分享此内容的网站地址，仅在QQ空间使用
+        // siteUrl锟角凤拷锟斤拷锟斤拷锟斤拷莸锟斤拷锟秸撅拷锟街凤拷锟斤拷锟斤拷锟絈Q锟秸硷拷使锟斤拷
         oks.setSiteUrl("http://sharesdk.cn");
-        // 启动分享GUI
+        // 锟斤拷锟斤拷锟斤拷锟斤拷GUI
         oks.show(this);
     }
 }

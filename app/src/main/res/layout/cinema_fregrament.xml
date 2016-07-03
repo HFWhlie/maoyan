@@ -7,13 +7,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <include layout="@layout/cinema_title" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rl_cinema"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rl_cinema"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
 
         <RelativeLayout
             android:id="@+id/rl_showadress"
@@ -29,6 +30,7 @@
                 android:src="@drawable/t5" />
 
             <TextView
+                android:id="@+id/tv_adress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -46,20 +48,20 @@
     </LinearLayout>
 
     <ProgressBar
-        android:visibility="gone"
         android:id="@+id/pb"
         style="@style/mProgress_circle"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_centerInParent="true" />
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
 
     <ImageView
-        android:visibility="gone"
         android:id="@+id/iv_pb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:src="@drawable/backgroud_logo02" />
+        android:src="@drawable/backgroud_logo02"
+        android:visibility="gone" />
 
     <LinearLayout
         android:id="@+id/ll_show"

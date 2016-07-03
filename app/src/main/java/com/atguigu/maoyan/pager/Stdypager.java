@@ -64,8 +64,6 @@ public class Stdypager extends Basepager {
         iv_pb = (ImageView) view.findViewById(R.id.iv_pb);
         ll_show = (LinearLayout) view.findViewById(R.id.ll_show);
         refresh = (MaterialRefreshLayout) view.findViewById(R.id.refresh);
-
-
     }
 
     private void setlistener() {

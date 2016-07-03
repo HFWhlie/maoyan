@@ -115,7 +115,7 @@ public class Stdybean {
             private String img;
             private boolean late;
             private int localPubSt;
-            private int mk;
+            private float mk;
             private String nm;
             private int pn;
             private boolean preShow;
@@ -124,7 +124,7 @@ public class Stdybean {
             private int recentShowDate;
             private int recentShowNum;
             private String rt;
-            private int sc;
+            private float sc;
             private String scm;
             private String showInfo;
             private int showNum;
@@ -244,11 +244,11 @@ public class Stdybean {
                 this.localPubSt = localPubSt;
             }
 
-            public int getMk() {
+            public float getMk() {
                 return mk;
             }
 
-            public void setMk(int mk) {
+            public void setMk(float mk) {
                 this.mk = mk;
             }
 
@@ -316,11 +316,11 @@ public class Stdybean {
                 this.rt = rt;
             }
 
-            public int getSc() {
+            public float getSc() {
                 return sc;
             }
 
-            public void setSc(int sc) {
+            public void setSc(float sc) {
                 this.sc = sc;
             }
 

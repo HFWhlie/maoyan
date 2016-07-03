@@ -43,6 +43,7 @@ import okhttp3.Request;
  */
 public class CinemaFregrament extends BaseFregrament implements View.OnClickListener {
 
+
     private View view;
     private RecyclerView rl_cinema;
     private ProgressBar pb;
@@ -56,10 +57,11 @@ public class CinemaFregrament extends BaseFregrament implements View.OnClickList
     private LinearLayout ll_city;
     private ImageView iv_cityseach;
     private ImageView iv_seach;
-
+    private TextView tv_adress;
 
     public CinemaFregrament(Context context) {
         super(context);
+
     }
 
     @Override
@@ -80,16 +82,20 @@ public class CinemaFregrament extends BaseFregrament implements View.OnClickList
 
         ll_show = (LinearLayout) view.findViewById(R.id.ll_show);
         ll_city = (LinearLayout) view.findViewById(R.id.ll_city);
+        tv_adress = (TextView) view.findViewById(R.id.tv_adress);
+
     }
 
     private void setlistener() {
         ll_show.setOnClickListener(this);
         iv_cityseach.setOnClickListener(this);
         iv_seach.setOnClickListener(this);
+
     }
 
     @Override
     public void initData() {
+        
         cinemaurl = URL.cinemaurl;
         getFromNetData();
     }
@@ -235,7 +241,7 @@ public class CinemaFregrament extends BaseFregrament implements View.OnClickList
             public View getView(int position, View convertView, ViewGroup parent) {
                 tv = new TextView(context);
                 tv.setText(list.get(position) + "");
-                tv.setHeight(50);
+                tv.setHeight(ll_city.getHeight());
                 tv.setWidth(lv1.getWidth());
                 tv.setGravity(Gravity.CENTER);
                 tv.setTextSize(18);
@@ -285,7 +291,7 @@ public class CinemaFregrament extends BaseFregrament implements View.OnClickList
                             public View getView(int position, View convertView, ViewGroup parent) {
                                 TextView tv0 = new TextView(context);
                                 tv0.setText(arr0[position]);
-                                tv0.setHeight(50);
+                                tv0.setHeight(ll_city.getHeight());
                                 tv0.setWidth(lv2.getWidth());
                                 tv0.setGravity(Gravity.CENTER);
                                 tv0.setTextSize(18);
@@ -316,7 +322,7 @@ public class CinemaFregrament extends BaseFregrament implements View.OnClickList
                             public View getView(int position, View convertView, ViewGroup parent) {
                                 TextView tv1 = new TextView(context);
                                 tv1.setText(arr1[position]);
-                                tv1.setHeight(50);
+                                tv1.setHeight(ll_city.getHeight());
                                 tv1.setWidth(lv2.getWidth());
                                 tv1.setGravity(Gravity.CENTER);
                                 tv1.setTextSize(18);
@@ -351,7 +357,7 @@ public class CinemaFregrament extends BaseFregrament implements View.OnClickList
                                             public View getView(int position, View convertView, ViewGroup parent) {
                                                 TextView tv1 = new TextView(context);
                                                 tv1.setText(arr5[position]);
-                                                tv1.setHeight(50);
+                                                tv1.setHeight(ll_city.getHeight());
                                                 tv1.setWidth(lv3.getWidth());
                                                 tv1.setGravity(Gravity.CENTER);
                                                 tv1.setTextSize(18);

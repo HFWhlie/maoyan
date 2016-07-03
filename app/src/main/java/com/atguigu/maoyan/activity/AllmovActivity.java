@@ -40,7 +40,7 @@ import java.util.List;
 
 import okhttp3.Request;
 
-public class AllmovActivity extends Activity {
+public class AllmovActivity extends Activity implements View.OnClickListener {
 
     private Context context;
     private ImageView iv_back;
@@ -111,6 +111,12 @@ public class AllmovActivity extends Activity {
 
         findView();
         setData();
+        setListener();
+    }
+
+    private void setListener() {
+        iv_back.setOnClickListener(this);
+
     }
 
     //设置数据
@@ -357,4 +363,12 @@ public class AllmovActivity extends Activity {
         btGt = (Button) findViewById(R.id.bt_gt);
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.iv_back:
+                finish();
+                break;
+        }
+    }
 }
