@@ -155,15 +155,15 @@ public class FindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             ((EightHolder) holder).tv_count.setText(feedslist.get(position).getImageCount() + "张");
 
             Glide.with(context).load(feedslist.get(position).getImages().get(0).getUrl())
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)//图片的缓存
-                    .placeholder(R.drawable.background_icon01)//加载过程中的图片
-                    .error(R.drawable.background_icon01)//加载失败的时候显示的图片
-                    .into(((EightHolder) holder).iv1);//请求成功后把图片设置到的控件
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .placeholder(R.drawable.background_icon01)
+                    .error(R.drawable.background_icon01)
+                    .into(((EightHolder) holder).iv1);
             Glide.with(context).load(feedslist.get(position).getImages().get(1).getUrl())
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)//图片的缓存
-                    .placeholder(R.drawable.background_icon01)//加载过程中的图片
-                    .error(R.drawable.background_icon01)//加载失败的时候显示的图片
-                    .into(((EightHolder) holder).iv2);//请求成功后把图片设置到的控件
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .placeholder(R.drawable.background_icon01)
+                    .error(R.drawable.background_icon01)
+                    .into(((EightHolder) holder).iv2);
             Glide.with(context).load(feedslist.get(position).getImages().get(2).getUrl())
                     .diskCacheStrategy(DiskCacheStrategy.ALL)//图片的缓存
                     .placeholder(R.drawable.background_icon01)//加载过程中的图片
@@ -301,10 +301,7 @@ public class FindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             }
             initHandler.removeCallbacksAndMessages(null);
             initHandler.postDelayed(new Myrunnable(), 2000);
-
-
         }
-
 
         private InitHandler initHandler;
 
@@ -365,11 +362,6 @@ public class FindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         private class MyOnPageChangeListener implements ViewPager.OnPageChangeListener {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
                 int i = position % (data.size());
 
                 ll_point.getChildAt(prepoint).setEnabled(false);
@@ -377,6 +369,11 @@ public class FindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 ll_point.getChildAt(i).setEnabled(true);
 
                 prepoint = i;
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
             }
 
             @Override

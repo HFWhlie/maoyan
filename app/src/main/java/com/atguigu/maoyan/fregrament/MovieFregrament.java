@@ -15,7 +15,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.atguigu.maoyan.R;
-import com.atguigu.maoyan.activity.CityselectorActivity;
 import com.atguigu.maoyan.adapter.Movieadapter;
 import com.atguigu.maoyan.pager.Basepager;
 import com.atguigu.maoyan.pager.Hotpager;
@@ -24,6 +23,8 @@ import com.atguigu.maoyan.pager.Stdypager;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import droid.Activity01;
 
 /**
  * Created by tao on 2016/6/24.
@@ -100,7 +101,7 @@ public class MovieFregrament extends BaseFregrament implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.ll_city:
-                context.startActivity(new Intent(context,CityselectorActivity.class));
+                context.startActivity(new Intent(context, Activity01.class));
                 break;
         }
     }

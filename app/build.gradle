@@ -47,4 +47,7 @@ dependencies {
     compile files('libs/ShareSDK-Wechat-Favorite-2.7.3.jar')
     compile files('libs/ShareSDK-Wechat-Moments-2.7.3.jar')
     compile files('libs/locSDK_6.23.jar')
+    compile files('libs/pinyin4j-2.5.0.jar')
+    compile files('libs/pinyin4android1.0.jar')
+    compile files('libs/baidumapapi_v2_1_2.jar')
 }
