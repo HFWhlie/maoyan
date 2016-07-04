@@ -43,7 +43,6 @@ public class HotAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     //viewPager集合
     private List<HotPagerbean.DataBean> data;
-    private Hotbean.DataBean.MoviesBean moviesBean;
 
     public HotAdapter(Context context, List<Hotbean.DataBean.MoviesBean> list) {
         this.context = context;
@@ -72,7 +71,7 @@ public class HotAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
         if (getItemViewType(position) == TWO) {
 
-            moviesBean = list.get(position-1);
+            Hotbean.DataBean.MoviesBean moviesBean = list.get(position - 1);
             //片名
             ((MyHolder) holder).tv_name.setText(moviesBean.getNm());
             Log.e("TAG", "moviesBean.getNm() = " + moviesBean.getNm());
@@ -171,7 +170,7 @@ public class HotAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 @Override
                 public void onClick(View v) {
                     if (onClickitemListeren != null) {
-                        onClickitemListeren.onclickListener(moviesBean);
+                        onClickitemListeren.onclickListener(v,getLayoutPosition());
                     }
                 }
             });
@@ -276,7 +275,7 @@ public class HotAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
      * 自定义接口
      */
     public interface OnClickitemListeren {
-        public void onclickListener(Hotbean.DataBean.MoviesBean bean);
+        void onclickListener(View v, int layoutPosition);
     }
 
     public OnClickitemListeren onClickitemListeren;

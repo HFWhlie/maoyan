@@ -23,6 +23,7 @@ public class MeiguoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private Context context;
     private List<Meibean.DataBean.ComingBean> cominglist;
     private View view;
+    private Meibean.DataBean.ComingBean comingBean;
 
     public MeiguoAdapter(Context context, List<Meibean.DataBean.ComingBean> coming) {
         this.context = context;
@@ -37,23 +38,13 @@ public class MeiguoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        Meibean.DataBean.ComingBean comingBean = cominglist.get(position);
+        comingBean = cominglist.get(position);
 
-        ((MeiHolder)holder).tv_name.setText(comingBean.getNm());
-        ((MeiHolder)holder).tv_gread.setText(comingBean.getWish()+"");
-        ((MeiHolder)holder).tv_introduce.setText(comingBean.getOverseaTime()+"美国上映");
-        ((MeiHolder)holder).tv_people.setText(comingBean.getDesc());
-//        if(comingBean.getShowst() == 1) {
-//            ((MeiHolder)holder).bt_mai.setVisibility(View.GONE);
-//            ((MeiHolder)holder).bt_yu.setVisibility(View.GONE);
-//            ((MeiHolder)holder).ll_want.setVisibility(View.VISIBLE);
-//        }
-//        if(comingBean.getShowst() == 4){
-//            ((MeiHolder)holder).bt_mai.setVisibility(View.GONE);
-//            ((MeiHolder)holder).bt_yu.setVisibility(View.VISIBLE);
-//            ((MeiHolder)holder).ll_want.setVisibility(View.GONE);
-//        }
-        ((MeiHolder)holder).ll_want.setVisibility(View.VISIBLE);
+        ((MeiHolder) holder).tv_name.setText(comingBean.getNm());
+        ((MeiHolder) holder).tv_gread.setText(comingBean.getWish() + "");
+        ((MeiHolder) holder).tv_introduce.setText(comingBean.getOverseaTime() + "美国上映");
+        ((MeiHolder) holder).tv_people.setText(comingBean.getDesc());
+        ((MeiHolder) holder).ll_want.setVisibility(View.VISIBLE);
 
         Glide.with(context).load(comingBean.getImg())
                 .diskCacheStrategy(DiskCacheStrategy.ALL)//图片的缓存
@@ -98,7 +89,24 @@ public class MeiguoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             bt_yu = (Button) view.findViewById(R.id.bt_yu);
             ll_want = (LinearLayout) view.findViewById(R.id.ll_want);
 
-
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (onClickmeiitemlistener != null) {
+                        onClickmeiitemlistener.onClickmeiitemlistener(v, getLayoutPosition());
+                    }
+                }
+            });
         }
+    }
+
+    public interface OnClickmeiitemlistener {
+        void onClickmeiitemlistener(View v, int layoutPosition);
+    }
+
+    public OnClickmeiitemlistener onClickmeiitemlistener;
+
+    public void setOnClickmeiitemlistener(OnClickmeiitemlistener onClickmeiitemlistener) {
+        this.onClickmeiitemlistener = onClickmeiitemlistener;
     }
 }

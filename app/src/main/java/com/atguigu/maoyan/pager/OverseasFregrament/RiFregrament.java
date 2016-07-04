@@ -1,6 +1,7 @@
 package com.atguigu.maoyan.pager.OverseasFregrament;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.widget.ProgressBar;
 
 import com.atguigu.maoyan.R;
 import com.atguigu.maoyan.Utils.URL;
+import com.atguigu.maoyan.activity.HotHfive;
 import com.atguigu.maoyan.adapter.RibenAdapter;
 import com.atguigu.maoyan.bean.Ribean;
 import com.atguigu.maoyan.fregrament.BaseFregrament;
@@ -36,6 +38,7 @@ public class RiFregrament extends BaseFregrament {
     //日本请求地址
     private String riurl;
     private RibenAdapter adapter;
+    private List<Ribean.DataBean.HotBean> hotlist;
 
     public RiFregrament(Context context) {
         super(context);
@@ -97,9 +100,21 @@ public class RiFregrament extends BaseFregrament {
 
     private void pressData(String response) {
         Ribean ribean = new Gson().fromJson(response, Ribean.class);
-        List<Ribean.DataBean.HotBean> hotlist = ribean.getData().getHot();
+        hotlist = ribean.getData().getHot();
         rl_ri.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
         adapter = new RibenAdapter(context, hotlist);
         rl_ri.setAdapter(adapter);
+
+
+        adapter.setOnClickriitemlistener(new RibenAdapter.OnClickriitemlistener() {
+            @Override
+            public void onClickriitemlistener(View v, int layoutPosition) {
+                Intent intent = new Intent(context, HotHfive.class);
+                String nm = hotlist.get(layoutPosition).getNm();
+                intent.putExtra("key", nm);
+                intent.setFlags(0);
+                context.startActivity(intent);
+            }
+        });
     }
 }

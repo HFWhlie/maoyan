@@ -153,10 +153,10 @@ public class Hotpager extends Basepager {
         //跳转到H5
         adapter.setOnClickitemListeren(new HotAdapter.OnClickitemListeren() {
             @Override
-            public void onclickListener(Hotbean.DataBean.MoviesBean bean) {
+            public void onclickListener(View v, int layoutPosition) {
                 Intent intent = new Intent(context, HotHfive.class);
-                String nm = bean.getNm();
-                intent.putExtra("key",nm);
+                String nm1 = list.get(layoutPosition-1).getNm();
+                intent.putExtra("key",nm1);
                 intent.setFlags(1);
                 context.startActivity(intent);
             }

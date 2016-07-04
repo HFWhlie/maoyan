@@ -58,10 +58,11 @@ public class CinemaFregrament extends BaseFregrament implements View.OnClickList
     private ImageView iv_cityseach;
     private ImageView iv_seach;
     private TextView tv_adress;
+    private Citybean.DataBean data;
+    private TextView tv_city;
 
     public CinemaFregrament(Context context) {
         super(context);
-
     }
 
     @Override
@@ -83,6 +84,7 @@ public class CinemaFregrament extends BaseFregrament implements View.OnClickList
         ll_show = (LinearLayout) view.findViewById(R.id.ll_show);
         ll_city = (LinearLayout) view.findViewById(R.id.ll_city);
         tv_adress = (TextView) view.findViewById(R.id.tv_adress);
+        tv_city = (TextView) view.findViewById(R.id.tv_city);
 
     }
 
@@ -90,12 +92,32 @@ public class CinemaFregrament extends BaseFregrament implements View.OnClickList
         ll_show.setOnClickListener(this);
         iv_cityseach.setOnClickListener(this);
         iv_seach.setOnClickListener(this);
-
+//        ((MainActivity)context).setOnlistener(new MainActivity.Onlistener() {
+//
+//            @Override
+//            public void onclicklistener(final String key) {
+//                String text = (String) tv_city.getText();
+//                if (text.equals(key)) {
+//                    tv_city.setText(key);
+//                } else {
+//                    new AlertDialog.Builder(context)
+//                            .setTitle("定位到你当前的城市是北京，是否切换")
+//                            .setNegativeButton("取消", null)
+//                            .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+//                                @Override
+//                                public void onClick(DialogInterface dialog, int which) {
+//                                    tv_city.setText(key);
+//                                }
+//                            })
+//                            .show();
+//                }
+//            }
+//        });
     }
 
     @Override
     public void initData() {
-        
+
         cinemaurl = URL.cinemaurl;
         getFromNetData();
     }
@@ -150,7 +172,7 @@ public class CinemaFregrament extends BaseFregrament implements View.OnClickList
         response = response.replace("密云县", "miyunxian");
         response = response.replace("延庆县", "yanqingxian");
         Citybean citybean = new Gson().fromJson(response, Citybean.class);
-        Citybean.DataBean data = citybean.getData();
+        data = citybean.getData();
         rl_cinema.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
         adapter = new CinemaAdapter(context, data);
         rl_cinema.setAdapter(adapter);
@@ -173,9 +195,9 @@ public class CinemaFregrament extends BaseFregrament implements View.OnClickList
 
         adapter.setOnCinemaitemListener(new CinemaAdapter.OnCinemaitemListener() {
             @Override
-            public void onCinemaitemListener(Citybean.DataBean.changpingquBean changpingquBean) {
+            public void onCinemaitemListener(View v, int layoutPosition) {
                 Intent intent = new Intent(context, HotHfive.class);
-                String cinemaname = changpingquBean.getNm();
+                String cinemaname = data.getchangpingqu().get(layoutPosition - 1).getNm();
                 intent.putExtra("cinema", cinemaname);
                 intent.setFlags(3);
                 context.startActivity(intent);
@@ -191,7 +213,10 @@ public class CinemaFregrament extends BaseFregrament implements View.OnClickList
                 break;
 
             case R.id.ll_city://城市选择
-                Toast.makeText(context, "城市选择", Toast.LENGTH_SHORT).show();
+//                Intent intent = new Intent(context, Activity01.class);
+//                ((MainActivity) context).startActivityForResult(intent, 1);
+
+                Toast.makeText(context,"北京",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.iv_cityseach://城市搜索
                 showpopupWindow();
@@ -213,7 +238,7 @@ public class CinemaFregrament extends BaseFregrament implements View.OnClickList
         list.add("特殊厅");
         list.add("品牌");
         list.add("服务");
-        ViewGroup menuView = (ViewGroup) LayoutInflater.from(context).inflate(
+        View menuView = LayoutInflater.from(context).inflate(
                 R.layout.popup, null, true);
         final ListView lv1 = (ListView) menuView.findViewById(R.id.lv1);
         final ListView lv2 = (ListView) menuView.findViewById(R.id.lv2);
@@ -299,6 +324,7 @@ public class CinemaFregrament extends BaseFregrament implements View.OnClickList
                                 return tv0;
                             }
                         });
+                        lv3.setAdapter(null);
                         break;
                     case 1:
                         final String[] arr1 = {"1号线", "2号线", "3号线", "4号线", "5号线", "6号线", "7号线", "8号线", "9号线", "10号线", "11号线", "12号线", "13号线", "14号线", "15号线", "八通线"};
@@ -394,7 +420,7 @@ public class CinemaFregrament extends BaseFregrament implements View.OnClickList
                             public View getView(int position, View convertView, ViewGroup parent) {
                                 TextView tv2 = new TextView(context);
                                 tv2.setText(arr2[position]);
-                                tv2.setHeight(50);
+                                tv2.setHeight(ll_city.getHeight());
                                 tv2.setWidth(lv2.getWidth());
                                 tv2.setGravity(Gravity.CENTER);
                                 tv2.setTextSize(18);
@@ -402,6 +428,7 @@ public class CinemaFregrament extends BaseFregrament implements View.OnClickList
                                 return tv2;
                             }
                         });
+                        lv3.setAdapter(null);
                         break;
                     case 3:
                         final String[] arr3 = {"大地影院", "百汇老影院", "17.5影院", "保利国际影院"};
@@ -425,7 +452,7 @@ public class CinemaFregrament extends BaseFregrament implements View.OnClickList
                             public View getView(int position, View convertView, ViewGroup parent) {
                                 TextView tv3 = new TextView(context);
                                 tv3.setText(arr3[position]);
-                                tv3.setHeight(50);
+                                tv3.setHeight(ll_city.getHeight());
                                 tv3.setWidth(lv2.getWidth());
                                 tv3.setGravity(Gravity.CENTER);
                                 tv3.setTextSize(18);
@@ -433,7 +460,7 @@ public class CinemaFregrament extends BaseFregrament implements View.OnClickList
                                 return tv3;
                             }
                         });
-
+                        lv3.setAdapter(null);
                         break;
                     case 4:
                         final String[] arr4 = {"小吃", "可退票", "可改签", "会员卡"};
@@ -457,7 +484,7 @@ public class CinemaFregrament extends BaseFregrament implements View.OnClickList
                             public View getView(int position, View convertView, ViewGroup parent) {
                                 TextView tv4 = new TextView(context);
                                 tv4.setText(arr4[position]);
-                                tv4.setHeight(50);
+                                tv4.setHeight(ll_city.getHeight());
                                 tv4.setWidth(lv2.getWidth());
                                 tv4.setGravity(Gravity.CENTER);
                                 tv4.setTextSize(18);
@@ -465,7 +492,7 @@ public class CinemaFregrament extends BaseFregrament implements View.OnClickList
                                 return tv4;
                             }
                         });
-
+                        lv3.setAdapter(null);
                         break;
                 }
             }

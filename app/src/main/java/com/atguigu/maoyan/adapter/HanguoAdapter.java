@@ -103,6 +103,26 @@ public class HanguoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             tv1 = (TextView) view.findViewById(R.id.tv1);
             tv2 = (TextView) view.findViewById(R.id.tv2);
             tv_zhuangfang = (TextView) view.findViewById(R.id.tv_zhuangfang);
+
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(onClickHanitemlistener != null){
+                        onClickHanitemlistener.onClickHanitemlistener(v,getLayoutPosition());
+                    }
+                }
+            });
         }
+    }
+
+    public interface OnClickHanitemlistener {
+        void onClickHanitemlistener(View v, int layoutPosition);
+    }
+
+    public OnClickHanitemlistener onClickHanitemlistener;
+
+    public void setOnClickHanitemlistener(OnClickHanitemlistener onClickHanitemlistener) {
+        this.onClickHanitemlistener = onClickHanitemlistener;
     }
 }

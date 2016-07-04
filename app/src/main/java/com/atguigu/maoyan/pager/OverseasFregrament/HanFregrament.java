@@ -1,6 +1,7 @@
 package com.atguigu.maoyan.pager.OverseasFregrament;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.widget.ProgressBar;
 
 import com.atguigu.maoyan.R;
 import com.atguigu.maoyan.Utils.URL;
+import com.atguigu.maoyan.activity.HotHfive;
 import com.atguigu.maoyan.adapter.HanguoAdapter;
 import com.atguigu.maoyan.bean.Hanbean;
 import com.atguigu.maoyan.fregrament.BaseFregrament;
@@ -34,6 +36,7 @@ public class HanFregrament extends BaseFregrament {
     //韩国的请求地址
     private String hanurl;
     private HanguoAdapter adapter;
+    private List<Hanbean.DataBean.HotBean> hot;
 
     public HanFregrament(Context context) {
         super(context);
@@ -104,9 +107,20 @@ public class HanFregrament extends BaseFregrament {
      */
     private void pressData(String response) {
         Hanbean hanbean = new Gson().fromJson(response, Hanbean.class);
-        List<Hanbean.DataBean.HotBean> hot = hanbean.getData().getHot();
+        hot = hanbean.getData().getHot();
         rl_han.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
         adapter = new HanguoAdapter(context, hot);
         rl_han.setAdapter(adapter);
+
+        adapter.setOnClickHanitemlistener(new HanguoAdapter.OnClickHanitemlistener() {
+            @Override
+            public void onClickHanitemlistener(View v, int layoutPosition) {
+                Intent intent = new Intent(context, HotHfive.class);
+                String nm = hot.get(layoutPosition).getNm();
+                intent.putExtra("key", nm);
+                intent.setFlags(0);
+                context.startActivity(intent);
+            }
+        });
     }
 }

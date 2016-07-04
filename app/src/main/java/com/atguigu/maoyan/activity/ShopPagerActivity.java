@@ -9,7 +9,6 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -45,6 +44,7 @@ public class ShopPagerActivity extends Activity implements View.OnClickListener 
     private LinearLayout ll_isenable1;
     private LinearLayout ll_isenable2;
     private LinearLayout ll_isenable3;
+    private ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -213,76 +213,191 @@ public class ShopPagerActivity extends Activity implements View.OnClickListener 
                 finish();
                 break;
             case R.id.ll_isenable1:
-                final List list = new ArrayList();
-                list.add("全部/未分类的");
-                list.add("超蝙");
-                list.add("机器猫");
-                list.add("魔兽");
-                list.add("美队");
-                list.add("星球大战");
-                list.add("功夫熊猫");
-                list.add("变形金刚");
-                list.add("其他主题");
-                list.add("超人");
-                list.add("迪士尼");
-                list.add("钢铁侠");
-                list.add("史努比");
-                list.add("大圣");
-                list.add("日漫");
-                list.add("大白");
-                View view1 = LayoutInflater.from(context).inflate(
-                        R.layout.list1, null, true);
-                ListView lv_one = (ListView) findViewById(R.id.lv_one);
-                lv_one.setAdapter(new BaseAdapter() {
-                    @Override
-                    public int getCount() {
-                        return list.size();
-                    }
-
-                    @Override
-                    public Object getItem(int position) {
-                        return null;
-                    }
-
-                    @Override
-                    public long getItemId(int position) {
-                        return 0;
-                    }
-
-                    @Override
-                    public View getView(int position, View convertView, ViewGroup parent) {
-                        TextView tv = new TextView(context);
-                        tv.setText(list.get(position) + "");
-                        tv.setHeight(ll_isenable1.getHeight());
-                        tv.setWidth(rv.getWidth());
-                        tv.setGravity(Gravity.CENTER);
-                        tv.setTextSize(18);
-                        tv.setBackgroundColor(Color.WHITE);
-                        return tv;
-                    }
-                });
-
-                PopupWindow popupWindow = new PopupWindow(view1, LinearLayout.LayoutParams.WRAP_CONTENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT, true);
-                    popupWindow.setWidth(iv_back.getWidth());
-                    popupWindow.setHeight(200);
-                    // 需要设置一下此参数，点击外边可消失
-                    popupWindow.setBackgroundDrawable(new BitmapDrawable());
-                    //设置点击窗口外边窗口消失
-                    popupWindow.setOutsideTouchable(true);
-                    // 设置此参数获得焦点，否则无法点击
-                    popupWindow.setFocusable(true);
-            
-                popupWindow.showAsDropDown(ll_isenable1, 0, 0);
-
+                showPopupWindow1();
                 break;
             case R.id.ll_isenable2:
-
+                showPopupWindow2();
                 break;
             case R.id.ll_isenable3:
-
+                showPopupWindow3();
                 break;
 
         }
+    }
+
+    private void showPopupWindow3() {
+        PopupWindow popupWindow = new PopupWindow();
+        popupWindow.setWidth(rv.getWidth());
+        popupWindow.setHeight(500);
+        popupWindow.setContentView(listView);
+        // 需要设置一下此参数，点击外边可消失
+        popupWindow.setBackgroundDrawable(new BitmapDrawable());
+        //设置点击窗口外边窗口消失
+        popupWindow.setOutsideTouchable(true);
+        // 设置此参数获得焦点，否则无法点击
+        popupWindow.setFocusable(true);
+
+        popupWindow.showAsDropDown(ll_isenable1, 0, 0);
+
+        final List list = new ArrayList();
+        list.add("默认排序");
+        list.add("价格从低到高");
+        list.add("价格从高到低");
+        list.add("销量最多");
+        list.add("销量最小");
+        list.add("最近更新");
+        list.add("最远更新");
+        listView = new ListView(context);
+        listView.setAdapter(new BaseAdapter() {
+            @Override
+            public int getCount() {
+                return list.size();
+            }
+
+            @Override
+            public Object getItem(int position) {
+                return null;
+            }
+
+            @Override
+            public long getItemId(int position) {
+                return 0;
+            }
+
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                TextView tv = new TextView(context);
+                tv.setText(list.get(position) + "");
+                tv.setHeight(iv_back.getHeight());
+                tv.setWidth(rv.getWidth());
+                tv.setGravity(Gravity.VERTICAL_GRAVITY_MASK);
+                tv.setTextSize(18);
+                tv.setBackgroundColor(Color.WHITE);
+                return tv;
+            }
+        });
+    }
+
+    private void showPopupWindow2() {
+        PopupWindow popupWindow = new PopupWindow();
+        popupWindow.setWidth(rv.getWidth());
+        popupWindow.setHeight(500);
+        popupWindow.setContentView(listView);
+        // 需要设置一下此参数，点击外边可消失
+        popupWindow.setBackgroundDrawable(new BitmapDrawable());
+        //设置点击窗口外边窗口消失
+        popupWindow.setOutsideTouchable(true);
+        // 设置此参数获得焦点，否则无法点击
+        popupWindow.setFocusable(true);
+
+        popupWindow.showAsDropDown(ll_isenable1, 0, 0);
+
+        final List list = new ArrayList();
+        list.add("全部/未分类的");
+        list.add("数码");
+        list.add("高玩");
+        list.add("玩具");
+        list.add("生活");
+        list.add("服饰");
+        list.add("3C配件");
+        list.add("箱包");
+        list.add("手办公仔");
+        list.add("电影原著");
+        list.add("配饰");
+        list.add("家纺");
+        list.add("文具");
+        list.add("毛绒公仔");
+        listView = new ListView(context);
+        listView.setAdapter(new BaseAdapter() {
+            @Override
+            public int getCount() {
+                return list.size();
+            }
+
+            @Override
+            public Object getItem(int position) {
+                return null;
+            }
+
+            @Override
+            public long getItemId(int position) {
+                return 0;
+            }
+
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                TextView tv = new TextView(context);
+                tv.setText(list.get(position) + "");
+                tv.setHeight(iv_back.getHeight());
+                tv.setWidth(rv.getWidth());
+                tv.setGravity(Gravity.VERTICAL_GRAVITY_MASK);
+                tv.setTextSize(18);
+                tv.setBackgroundColor(Color.WHITE);
+                return tv;
+            }
+        });
+    }
+
+    private void showPopupWindow1() {
+
+        PopupWindow popupWindow = new PopupWindow();
+        popupWindow.setWidth(rv.getWidth());
+        popupWindow.setHeight(500);
+        popupWindow.setContentView(listView);
+        // 需要设置一下此参数，点击外边可消失
+        popupWindow.setBackgroundDrawable(new BitmapDrawable());
+        //设置点击窗口外边窗口消失
+        popupWindow.setOutsideTouchable(true);
+        // 设置此参数获得焦点，否则无法点击
+        popupWindow.setFocusable(true);
+
+        popupWindow.showAsDropDown(ll_isenable1, 0, 0);
+
+        final List list = new ArrayList();
+        list.add("全部/未分类的");
+        list.add("超蝙");
+        list.add("机器猫");
+        list.add("魔兽");
+        list.add("美队");
+        list.add("星球大战");
+        list.add("功夫熊猫");
+        list.add("变形金刚");
+        list.add("其他主题");
+        list.add("超人");
+        list.add("迪士尼");
+        list.add("钢铁侠");
+        list.add("史努比");
+        list.add("大圣");
+        list.add("日漫");
+        list.add("大白");
+        listView = new ListView(context);
+        listView.setAdapter(new BaseAdapter() {
+            @Override
+            public int getCount() {
+                return list.size();
+            }
+
+            @Override
+            public Object getItem(int position) {
+                return null;
+            }
+
+            @Override
+            public long getItemId(int position) {
+                return 0;
+            }
+
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                TextView tv = new TextView(context);
+                tv.setText(list.get(position) + "");
+                tv.setHeight(iv_back.getHeight());
+                tv.setWidth(rv.getWidth());
+                tv.setGravity(Gravity.VERTICAL_GRAVITY_MASK);
+                tv.setTextSize(18);
+                tv.setBackgroundColor(Color.WHITE);
+                return tv;
+            }
+        });
     }
 }

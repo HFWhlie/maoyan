@@ -148,10 +148,10 @@ public class Stdypager extends Basepager {
         //点击某个item的监听
         adapter.setOnStdylistener(new StdyAdapter.OnStdylistener() {
             @Override
-            public void onstdyonclicklistener(Stdybean.DataBean.ComingBean comingBean) {
+            public void onstdyonclicklistener(View v, int layoutPosition) {
                 Intent intent = new Intent(context, HotHfive.class);
-                String stdyname = comingBean.getNm();
-                intent.putExtra("stdy", stdyname);
+                String nm = cominglist.get(layoutPosition-1).getNm();
+                intent.putExtra("stdy", nm);
                 intent.setFlags(2);
                 context.startActivity(intent);
             }

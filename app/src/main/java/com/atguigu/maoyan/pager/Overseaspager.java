@@ -54,7 +54,18 @@ public class Overseaspager extends Basepager {
     public View initview() {
         view = View.inflate(context, R.layout.overseas_pager, null);
         findview();
+
+        setlistener();
         return view;
+    }
+
+    private void setlistener() {
+        ll_show.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFromNetData();
+            }
+        });
     }
 
     private void findview() {
@@ -89,6 +100,7 @@ public class Overseaspager extends Basepager {
     private void getFromNetData() {
         pb.setVisibility(View.VISIBLE);
         iv_pb.setVisibility(View.VISIBLE);
+        ll_show.setVisibility(View.GONE);
         OkHttpUtils.get().url(overseastitleurl).build().execute(new StringCallback() {
             @Override
             public void onError(Request request, Exception e) {
@@ -103,7 +115,7 @@ public class Overseaspager extends Basepager {
                 Log.e("TAG", "获取标题数据成功");
                 pb.setVisibility(View.GONE);
                 iv_pb.setVisibility(View.GONE);
-                ll_show.setVisibility(View.VISIBLE);
+                ll_show.setVisibility(View.GONE);
                 pressData(response);
             }
         });

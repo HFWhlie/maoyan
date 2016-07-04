@@ -1,6 +1,7 @@
 package com.atguigu.maoyan.pager.OverseasFregrament;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.widget.ProgressBar;
 
 import com.atguigu.maoyan.R;
 import com.atguigu.maoyan.Utils.URL;
+import com.atguigu.maoyan.activity.HotHfive;
 import com.atguigu.maoyan.adapter.MeiguoAdapter;
 import com.atguigu.maoyan.bean.Meibean;
 import com.atguigu.maoyan.fregrament.BaseFregrament;
@@ -35,6 +37,7 @@ public class MeiFregrament extends BaseFregrament {
     //美国的请求地址
     private String meiurl;
     private MeiguoAdapter adapter;
+    private List<Meibean.DataBean.ComingBean> coming;
 
     public MeiFregrament(Context context) {
         super(context);
@@ -99,11 +102,23 @@ public class MeiFregrament extends BaseFregrament {
 
     private void pressData(String response) {
         Meibean meibean = new Gson().fromJson(response, Meibean.class);
-        List<Meibean.DataBean.ComingBean> coming = meibean.getData().getComing();
+        coming = meibean.getData().getComing();
 
         rl_mei.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
         adapter = new MeiguoAdapter(context, coming);
         rl_mei.setAdapter(adapter);
+
+
+        adapter.setOnClickmeiitemlistener(new MeiguoAdapter.OnClickmeiitemlistener() {
+            @Override
+            public void onClickmeiitemlistener(View v, int layoutPosition) {
+                Intent intent = new Intent(context, HotHfive.class);
+                String nm = coming.get(layoutPosition).getNm();
+                intent.putExtra("key", nm);
+                intent.setFlags(0);
+                context.startActivity(intent);
+            }
+        });
 
     }
 }

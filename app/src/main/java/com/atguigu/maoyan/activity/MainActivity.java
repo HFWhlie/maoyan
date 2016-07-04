@@ -1,5 +1,6 @@
 package com.atguigu.maoyan.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -36,6 +37,7 @@ public class MainActivity extends FragmentActivity {
     private int curFregrament = 0;
     private boolean flag = false;
     private Handler handler = new Handler();
+    private String hot;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,13 +48,7 @@ public class MainActivity extends FragmentActivity {
         findView();
         initData();
         setListener();
-
-
-
     }
-
-
-
 
     /**
      * 初始化数据
@@ -101,7 +97,6 @@ public class MainActivity extends FragmentActivity {
                     break;
             }
             switchFregrament();
-
         }
     }
 
@@ -158,5 +153,25 @@ public class MainActivity extends FragmentActivity {
     }
 
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK && requestCode == 1) {
+            String key = data.getStringExtra("hot");
 
+            if (onlistener != null) {
+                onlistener.onclicklistener(key);
+            }
+        }
+    }
+
+    //接口
+    public interface Onlistener {
+        public void onclicklistener(String key);
+    }
+
+    public Onlistener onlistener;
+
+    public void setOnlistener(Onlistener onlistener) {
+        this.onlistener = onlistener;
+    }
 }

@@ -25,4 +25,8 @@ public abstract class BaseFregrament extends Fragment {
     public void initData() {
 
     }
+
+    public void setButton(String key) {
+
+    }
 }

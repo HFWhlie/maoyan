@@ -2,6 +2,7 @@ package droid;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.PixelFormat;
@@ -30,6 +31,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.atguigu.maoyan.R;
+import com.atguigu.maoyan.activity.MainActivity;
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
@@ -73,6 +75,7 @@ public class Activity01 extends Activity implements OnScrollListener {
     private Context context;
     private DatabaseHelper helper;
     private ImageView iv_back;
+    private TextView city;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -146,10 +149,14 @@ public class Activity01 extends Activity implements OnScrollListener {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 if (position >= 4) {
-
                     Toast.makeText(getApplicationContext(),
                             allCity_lists.get(position).getName(),
                             Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent(context, MainActivity.class);
+                    intent.putExtra("hot", allCity_lists.get(position).getName());
+                    setResult(RESULT_OK, intent);
+                    finish();
                 }
             }
         });
@@ -166,6 +173,11 @@ public class Activity01 extends Activity implements OnScrollListener {
                 Toast.makeText(getApplicationContext(),
                         city_result.get(position).getName(), Toast.LENGTH_SHORT)
                         .show();
+
+                Intent intent = new Intent(context, MainActivity.class);
+                intent.putExtra("hot", city_result.get(position).getName());
+                setResult(RESULT_OK, intent);
+                finish();
             }
         });
         initOverlay();
@@ -465,8 +477,7 @@ public class Activity01 extends Activity implements OnScrollListener {
         private List<String> hisCity;
         final int VIEW_TYPE = 5;
 
-        public ListAdapter(Context context, List<City> list,
-                           List<City> hotList, List<String> hisCity) {
+        public ListAdapter(Context context, List<City> list, List<City> hotList, List<String> hisCity) {
             this.inflater = LayoutInflater.from(context);
             this.list = list;
             this.context = context;
@@ -517,7 +528,6 @@ public class Activity01 extends Activity implements OnScrollListener {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            final TextView city;
             int viewType = getItemViewType(position);
             if (viewType == 0) { // 定位
                 convertView = inflater.inflate(R.layout.frist_list_item, null);
@@ -532,6 +542,8 @@ public class Activity01 extends Activity implements OnScrollListener {
                             Toast.makeText(getApplicationContext(),
                                     city.getText().toString(),
                                     Toast.LENGTH_SHORT).show();
+
+
                         } else if (locateProcess == 3) {
                             locateProcess = 1;
                             personList.setAdapter(adapter);
@@ -564,20 +576,19 @@ public class Activity01 extends Activity implements OnScrollListener {
                 }
             } else if (viewType == 1) { // 最近访问城市
                 convertView = inflater.inflate(R.layout.recent_city, null);
-                GridView rencentCity = (GridView) convertView
-                        .findViewById(R.id.recent_city);
-                rencentCity
-                        .setAdapter(new HitCityAdapter(context, this.hisCity));
+                GridView rencentCity = (GridView) convertView.findViewById(R.id.recent_city);
+                rencentCity.setAdapter(new HitCityAdapter(context, this.hisCity));
                 rencentCity.setOnItemClickListener(new OnItemClickListener() {
 
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view,
                                             int position, long id) {
+                        Toast.makeText(context, city_history.get(position), Toast.LENGTH_SHORT).show();
 
-                        Toast.makeText(getApplicationContext(),
-                                city_history.get(position), Toast.LENGTH_SHORT)
-                                .show();
-
+                        Intent intent = new Intent(context, MainActivity.class);
+                        intent.putExtra("hot", city_history.get(position));
+                        setResult(RESULT_OK, intent);
+                        finish();
                     }
                 });
                 TextView recentHint = (TextView) convertView
@@ -596,6 +607,11 @@ public class Activity01 extends Activity implements OnScrollListener {
                         Toast.makeText(getApplicationContext(),
                                 city_hot.get(position).getName(),
                                 Toast.LENGTH_SHORT).show();
+
+                        Intent intent = new Intent(context, MainActivity.class);
+                        intent.putExtra("hot", city_hot.get(position).getName());
+                        setResult(RESULT_OK, intent);
+                        finish();
 
                     }
                 });
@@ -620,8 +636,7 @@ public class Activity01 extends Activity implements OnScrollListener {
                 if (position >= 1) {
                     holder.name.setText(list.get(position).getName());
                     String currentStr = getAlpha(list.get(position).getPinyi());
-                    String previewStr = (position - 1) >= 0 ? getAlpha(list
-                            .get(position - 1).getPinyi()) : " ";
+                    String previewStr = (position - 1) >= 0 ? getAlpha(list.get(position - 1).getPinyi()) : " ";
                     if (!previewStr.equals(currentStr)) {
                         holder.alpha.setVisibility(View.VISIBLE);
                         holder.alpha.setText(currentStr);

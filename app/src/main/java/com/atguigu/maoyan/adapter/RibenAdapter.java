@@ -42,15 +42,8 @@ public class RibenAdapter extends RecyclerView.Adapter {
         ((RiHolder) holder).tv_gread.setText(hotBean.getSc() + "");
         ((RiHolder) holder).tv_introduce.setText(hotBean.getCat());
         ((RiHolder) holder).tv_people.setText(hotBean.getDesc());
-//        if (hotBean.get!= null && hotBean.getHeadLinesVO().size() > 0) {
-//            ((RiHolder) holder).ll_zhuan.setVisibility(View.VISIBLE);
-//            ((RiHolder) holder).tv_zhuti.setText(hotBean.getHeadLinesVO().get(0).getType());
-//            ((RiHolder) holder).tv1.setText(hotBean.getHeadLinesVO().get(0).getTitle());
-//            ((RiHolder) holder).tv_zhuangfang.setText(hotBean.getHeadLinesVO().get(1).getType());
-//            ((RiHolder) holder).tv2.setText(hotBean.getHeadLinesVO().get(1).getTitle());
-//        } else {
-            ((RiHolder) holder).ll_zhuan.setVisibility(View.GONE);
-//        }
+        ((RiHolder) holder).ll_zhuan.setVisibility(View.GONE);
+
         if (hotBean.getShowst() == 2) {
             ((RiHolder) holder).bt_mai.setVisibility(View.GONE);
             ((RiHolder) holder).ll_want.setVisibility(View.VISIBLE);
@@ -64,7 +57,6 @@ public class RibenAdapter extends RecyclerView.Adapter {
                 .placeholder(R.drawable.background_icon01)//加载过程中的图片
                 .error(R.drawable.background_icon01)//加载失败的时候显示的图片
                 .into(((RiHolder) holder).iv_icon);//请求成功后把图片设置到的控件
-
     }
 
     @Override
@@ -88,6 +80,7 @@ public class RibenAdapter extends RecyclerView.Adapter {
 
         private LinearLayout ll_want;
         private LinearLayout ll_zhuan;
+
         public RiHolder(View view) {
             super(view);
             iv_icon = (ImageView) view.findViewById(R.id.iv_icon);
@@ -102,6 +95,25 @@ public class RibenAdapter extends RecyclerView.Adapter {
             tv1 = (TextView) view.findViewById(R.id.tv1);
             tv2 = (TextView) view.findViewById(R.id.tv2);
             tv_zhuangfang = (TextView) view.findViewById(R.id.tv_zhuangfang);
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(onClickriitemlistener != null){
+                        onClickriitemlistener.onClickriitemlistener(v,getLayoutPosition());
+                    }
+                }
+            });
         }
+    }
+
+    public interface OnClickriitemlistener{
+        void onClickriitemlistener(View v, int layoutPosition);
+    }
+
+    public OnClickriitemlistener onClickriitemlistener;
+
+    public void setOnClickriitemlistener(OnClickriitemlistener onClickriitemlistener) {
+        this.onClickriitemlistener = onClickriitemlistener;
     }
 }

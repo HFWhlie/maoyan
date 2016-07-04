@@ -32,7 +32,6 @@ public class StdyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     //listview集合
     private List<Stdybean.DataBean.ComingBean> list;
     private Context context;
-    private Stdybean.DataBean.ComingBean comingBean;
 
     public StdyAdapter(Context context, List<Stdybean.DataBean.ComingBean> cominglist) {
         this.context = context;
@@ -73,7 +72,7 @@ public class StdyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
 
         if (holder instanceof ContentHolder) {
-            comingBean = list.get(position-1);
+            Stdybean.DataBean.ComingBean comingBean = list.get(position - 1);
 
             //是否显示标题
             String rt = comingBean.getRt();
@@ -185,7 +184,7 @@ public class StdyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 @Override
                 public void onClick(View v) {
                     if(onStdylistener != null){
-                        onStdylistener.onstdyonclicklistener(comingBean);
+                        onStdylistener.onstdyonclicklistener(v,getLayoutPosition());
                     }
                 }
             });
@@ -214,7 +213,7 @@ public class StdyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 
     public interface OnStdylistener{
-        public void onstdyonclicklistener(Stdybean.DataBean.ComingBean comingBean);
+        void onstdyonclicklistener(View v, int layoutPosition);
     }
 
     public OnStdylistener onStdylistener;

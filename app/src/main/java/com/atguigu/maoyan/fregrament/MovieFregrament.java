@@ -1,7 +1,9 @@
 package com.atguigu.maoyan.fregrament;
 
 import android.annotation.TargetApi;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.support.v4.view.ViewPager;
@@ -15,6 +17,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.atguigu.maoyan.R;
+import com.atguigu.maoyan.activity.MainActivity;
 import com.atguigu.maoyan.adapter.Movieadapter;
 import com.atguigu.maoyan.pager.Basepager;
 import com.atguigu.maoyan.pager.Hotpager;
@@ -61,6 +64,29 @@ public class MovieFregrament extends BaseFregrament implements View.OnClickListe
 
     private void setListener() {
         ll_city.setOnClickListener(this);
+
+        ((MainActivity) context).setOnlistener(new MainActivity.Onlistener() {
+
+            @Override
+            public void onclicklistener(final String key) {
+                String text = (String) tv_city.getText();
+                if (text.equals(key)) {
+                    tv_city.setText(key);
+                } else {
+                    new AlertDialog.Builder(context)
+                            .setTitle("定位到你当前的城市是北京，是否切换")
+                            .setNegativeButton("取消", null)
+                            .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    tv_city.setText(key);
+                                }
+                            })
+                            .show();
+                }
+            }
+        });
+
     }
 
     private void findView() {
@@ -72,11 +98,11 @@ public class MovieFregrament extends BaseFregrament implements View.OnClickListe
         rb_stdy_show = (RadioButton) view.findViewById(R.id.rb_stdy_show);
         rb_overseas = (RadioButton) view.findViewById(R.id.rb_overseas);
         tv_city = (TextView) view.findViewById(R.id.tv_city);
+
     }
 
     @Override
     public void initData() {
-
         rg_title.check(R.id.rb_hot_show);
         //准备数据
         list = new ArrayList<>();
@@ -99,9 +125,10 @@ public class MovieFregrament extends BaseFregrament implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.ll_city:
-                context.startActivity(new Intent(context, Activity01.class));
+                Intent intent = new Intent(context, Activity01.class);
+                ((MainActivity) context).startActivityForResult(intent, 1);
                 break;
         }
     }

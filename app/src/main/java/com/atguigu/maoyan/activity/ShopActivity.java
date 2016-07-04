@@ -23,7 +23,7 @@ import java.util.List;
 
 import okhttp3.Request;
 
-public class ShopActivity extends Activity {
+public class ShopActivity extends Activity implements View.OnClickListener {
     private Context context;
     private ImageView iv_back;
     private ImageView iv_seach;
@@ -49,8 +49,8 @@ public class ShopActivity extends Activity {
     }
 
     private void setlistener() {
-//        iv_back.setOnClickListener(this);
-//        iv_seach.setOnClickListener(this);
+        iv_back.setOnClickListener(this);
+        iv_seach.setOnClickListener(this);
 
         recycler.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -71,30 +71,30 @@ public class ShopActivity extends Activity {
                             //是否向上滑动
                             isUpSlide = disY < 0;
                             if (isUpSlide) {
-                                if (!isToolshide){
-                                    if(Math.abs(disY) > rl_show.getHeight()) {
+                                if (!isToolshide) {
+                                    if (Math.abs(disY) > rl_show.getHeight()) {
                                         rl_show.setVisibility(View.VISIBLE);
                                         isToolshide = true;
-                                    }else{
+                                    } else {
                                         rl_show.setVisibility(View.GONE);
                                         isToolshide = false;
                                     }
-                                }else{
+                                } else {
                                     rl_show.setVisibility(View.VISIBLE);
                                     isToolshide = true;
                                 }
-                            }else{
-                                if(!isToolshide) {
-                                    if(Math.abs(disY) > rl_show.getHeight()) {
+                            } else {
+                                if (!isToolshide) {
+                                    if (Math.abs(disY) > rl_show.getHeight()) {
                                         rl_show.setVisibility(View.VISIBLE);
                                         isToolshide = true;
-                                    }else{
+                                    } else {
                                         rl_show.setVisibility(View.GONE);
                                         isToolshide = false;
                                     }
                                     rl_show.setVisibility(View.VISIBLE);
                                     isToolshide = true;
-                                }else {
+                                } else {
                                     rl_show.setVisibility(View.GONE);
                                     isToolshide = false;
                                 }
@@ -141,5 +141,17 @@ public class ShopActivity extends Activity {
         iv_seach = (ImageView) findViewById(R.id.iv_seach);
         recycler = (RecyclerView) findViewById(R.id.recycler);
         rl_show = (RelativeLayout) findViewById(R.id.rl_show);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.iv_seach:
+
+                break;
+            case R.id.iv_back:
+                finish();
+                break;
+        }
     }
 }

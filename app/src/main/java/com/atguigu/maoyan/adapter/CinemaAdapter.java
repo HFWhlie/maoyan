@@ -37,18 +37,18 @@ public class CinemaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private Citybean.DataBean.changpingquBean changpingquBean;
 
     public CinemaAdapter(Context context, Citybean.DataBean data) {
-        this.context =context;
+        this.context = context;
         this.list = data.getchangpingqu();
-        Log.e("TAG", "List.size =" +list.size());
+        Log.e("TAG", "List.size =" + list.size());
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if(viewType == ONE){
+        if (viewType == ONE) {
             View view = View.inflate(context, R.layout.cinema_pager, null);
             return new CinemapagerHolder(view);
         }
-        if(viewType == TWO) {
+        if (viewType == TWO) {
             View view = View.inflate(context, R.layout.cinema_item, null);
             return new CinemaHolder(view);
         }
@@ -57,17 +57,17 @@ public class CinemaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if(holder instanceof CinemapagerHolder) {
-            if(position == 0)
-            ((CinemapagerHolder)holder).setData();
+        if (holder instanceof CinemapagerHolder) {
+            if (position == 0)
+                ((CinemapagerHolder) holder).setData();
         }
-        if(holder instanceof CinemaHolder) {
+        if (holder instanceof CinemaHolder) {
 
             changpingquBean = list.get(position - 1);
 
-            ((CinemaHolder)holder).tv_name.setText(changpingquBean.getNm());
-            ((CinemaHolder)holder).tv_price.setText(changpingquBean.getSellPrice()+"");
-            ((CinemaHolder)holder).tv_dress.setText(changpingquBean.getAddr().replace("changpingqu", "昌平区"));
+            ((CinemaHolder) holder).tv_name.setText(changpingquBean.getNm());
+            ((CinemaHolder) holder).tv_price.setText(changpingquBean.getSellPrice() + "");
+            ((CinemaHolder) holder).tv_dress.setText(changpingquBean.getAddr().replace("changpingqu", "昌平区"));
             //根据经温度 计算距离
             double lng = changpingquBean.getLng();
             double lat = changpingquBean.getLat();
@@ -81,12 +81,12 @@ public class CinemaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @Override
     public int getItemCount() {
-        return list.size()+1;
+        return list.size() + 1;
     }
 
     @Override
     public int getItemViewType(int position) {
-        if(position == 0){
+        if (position == 0) {
             return ONE;
         }
         return TWO;
@@ -100,6 +100,7 @@ public class CinemaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         private TextView tv_price;
         private TextView tv_dress;
         private TextView tv_length;
+
         public CinemaHolder(View view) {
             super(view);
 
@@ -108,14 +109,14 @@ public class CinemaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             tv_dress = (TextView) view.findViewById(R.id.tv_dress);
             tv_length = (TextView) view.findViewById(R.id.tv_length);
 
-           view.setOnClickListener(new View.OnClickListener() {
-               @Override
-               public void onClick(View v) {
-                   if(onCinemaitemListener != null){
-                       onCinemaitemListener.onCinemaitemListener(changpingquBean);
-                   }
-               }
-           });
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (onCinemaitemListener != null) {
+                        onCinemaitemListener.onCinemaitemListener(v, getLayoutPosition());
+                    }
+                }
+            });
         }
     }
 
@@ -137,7 +138,7 @@ public class CinemaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             tv_login.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    context.startActivity(new Intent(context,LoginActivity.class));
+                    context.startActivity(new Intent(context, LoginActivity.class));
                 }
             });
         }
@@ -165,7 +166,7 @@ public class CinemaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         private void pressData(String response) {
             CinemaPagerbean cinemaPagerbean = new Gson().fromJson(response, CinemaPagerbean.class);
             data = cinemaPagerbean.getData();
-            adapter = new CinemapagerAdapter(context,data);
+            adapter = new CinemapagerAdapter(context, data);
             vp_cinema.setAdapter(adapter);
 
             //轮播图
@@ -173,22 +174,24 @@ public class CinemaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             vp_cinema.setCurrentItem(50);
             //首先移除所有消息
 
-            if(initHandler == null){
-               initHandler = new InitHandler();
+            if (initHandler == null) {
+                initHandler = new InitHandler();
             }
             initHandler.removeCallbacksAndMessages(null);
-            initHandler.postDelayed(new Myrunnable(),2000);
+            initHandler.postDelayed(new Myrunnable(), 2000);
 
         }
+
         private InitHandler initHandler;
-        private class InitHandler extends Handler{
+
+        private class InitHandler extends Handler {
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
 
-                vp_cinema.setCurrentItem((vp_cinema.getCurrentItem()+1));
+                vp_cinema.setCurrentItem((vp_cinema.getCurrentItem() + 1));
                 //再次发消息
-                initHandler.postDelayed(new Myrunnable(),2000);
+                initHandler.postDelayed(new Myrunnable(), 2000);
             }
         }
 
@@ -200,9 +203,12 @@ public class CinemaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         }
     }
 
-    public interface OnCinemaitemListener{
-        public void onCinemaitemListener(Citybean.DataBean.changpingquBean changpingquBean);
+    public interface OnCinemaitemListener {
+
+        void onCinemaitemListener(View v, int layoutPosition);
+
     }
+
     public OnCinemaitemListener onCinemaitemListener;
 
     public void setOnCinemaitemListener(OnCinemaitemListener onCinemaitemListener) {
