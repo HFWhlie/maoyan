@@ -2,12 +2,15 @@ package com.atguigu.maoyan.fregrament;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.atguigu.maoyan.R;
 import com.atguigu.maoyan.activity.CartActivity;
 import com.atguigu.maoyan.activity.LoginActivity;
+import com.atguigu.maoyan.activity.MainActivity;
 import com.atguigu.maoyan.activity.ShopActivity;
 
 /**
@@ -35,13 +38,15 @@ public class MyFregrament extends BaseFregrament implements View.OnClickListener
     private RelativeLayout rl_set;
 
     private RelativeLayout rl_all;
+    private TextView tv_name;
+
     public MyFregrament(Context context) {
         super(context);
     }
 
     @Override
     public View initView() {
-        view = View.inflate(context, R.layout.my_fregrament,null);
+        view = View.inflate(context, R.layout.my_fregrament, null);
         findView();
         setlistener();
         return view;
@@ -70,6 +75,15 @@ public class MyFregrament extends BaseFregrament implements View.OnClickListener
         rl_shop.setOnClickListener(this);
         rl_cj.setOnClickListener(this);
         rl_all.setOnClickListener(this);
+
+        ((MainActivity) context).setOnlistener2(new MainActivity.Onlistener2() {
+            @Override
+            public void onclicklistener2(String key) {
+                tv_name.setText(key);
+
+                Log.e("MYname", key);
+            }
+        });
     }
 
 
@@ -92,6 +106,8 @@ public class MyFregrament extends BaseFregrament implements View.OnClickListener
         rl_set = (RelativeLayout) view.findViewById(R.id.rl_set);
         rl_all = (RelativeLayout) view.findViewById(R.id.rl_all);
 
+        tv_name = (TextView) view.findViewById(R.id.tv_name);
+
     }
 
     @Override
@@ -101,15 +117,18 @@ public class MyFregrament extends BaseFregrament implements View.OnClickListener
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.rl_shop:
-                context.startActivity(new Intent(context,ShopActivity.class));
+        switch (v.getId()) {
+            case R.id.rl_shop://商城
+                context.startActivity(new Intent(context, ShopActivity.class));
                 break;
-            case R.id.rl_login:
-                context.startActivity(new Intent(context, LoginActivity.class));
+            case R.id.rl_login://登入
+                Intent intent = new Intent(context, LoginActivity.class);
+                ((MainActivity) context).startActivityForResult(intent, 2);
                 break;
             case R.id.rl_all:
                 context.startActivity(new Intent(context, CartActivity.class));
+
+
         }
     }
 }

@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -155,16 +156,25 @@ public class MainActivity extends FragmentActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == RESULT_OK && requestCode == 1) {
-            String key = data.getStringExtra("hot");
+        if (resultCode == 0 && requestCode == 1) {
+            String hot = data.getStringExtra("hot");
 
             if (onlistener != null) {
-                onlistener.onclicklistener(key);
+                onlistener.onclicklistener(hot);
             }
         }
+
+        if (resultCode == 2 && requestCode == 2) {
+            String key = data.getStringExtra("key");
+            Log.e("namekay",key);
+            if (onlistener2 != null) {
+                onlistener2.onclicklistener2(key);
+            }
+        }
+
     }
 
-    //接口
+    //接口1
     public interface Onlistener {
         public void onclicklistener(String key);
     }
@@ -173,5 +183,16 @@ public class MainActivity extends FragmentActivity {
 
     public void setOnlistener(Onlistener onlistener) {
         this.onlistener = onlistener;
+    }
+
+    //接口2
+    public interface Onlistener2 {
+        public void onclicklistener2(String key);
+    }
+
+    public Onlistener2 onlistener2;
+
+    public void setOnlistener2(Onlistener2 onlistener2) {
+        this.onlistener2 = onlistener2;
     }
 }

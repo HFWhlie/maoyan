@@ -155,9 +155,11 @@ public class CartActivity extends Activity {
                 if (action == ACTION_EDIT) {
                     //显示删除按钮
                     showDeleteButton();
+//                    adapter.showTotalPrice();
                 } else if (action == ACITON_COMPLETE) {
                     //隐藏删除按钮
                     hideDeleteButton();
+                    adapter.showTotalPrice();
                 }
 
             }

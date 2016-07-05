@@ -155,7 +155,7 @@ public class Activity01 extends Activity implements OnScrollListener {
 
                     Intent intent = new Intent(context, MainActivity.class);
                     intent.putExtra("hot", allCity_lists.get(position).getName());
-                    setResult(RESULT_OK, intent);
+                    setResult(0, intent);
                     finish();
                 }
             }
@@ -176,7 +176,7 @@ public class Activity01 extends Activity implements OnScrollListener {
 
                 Intent intent = new Intent(context, MainActivity.class);
                 intent.putExtra("hot", city_result.get(position).getName());
-                setResult(RESULT_OK, intent);
+                setResult(0, intent);
                 finish();
             }
         });
@@ -587,7 +587,7 @@ public class Activity01 extends Activity implements OnScrollListener {
 
                         Intent intent = new Intent(context, MainActivity.class);
                         intent.putExtra("hot", city_history.get(position));
-                        setResult(RESULT_OK, intent);
+                        setResult(0, intent);
                         finish();
                     }
                 });
@@ -610,7 +610,7 @@ public class Activity01 extends Activity implements OnScrollListener {
 
                         Intent intent = new Intent(context, MainActivity.class);
                         intent.putExtra("hot", city_hot.get(position).getName());
-                        setResult(RESULT_OK, intent);
+                        setResult(0, intent);
                         finish();
 
                     }
