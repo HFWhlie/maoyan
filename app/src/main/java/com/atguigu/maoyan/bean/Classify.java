@@ -24,7 +24,7 @@ public class Classify implements Serializable{
         this.data = data;
     }
 
-    public static class DataBean {
+    public static class DataBean implements Serializable {
         private String region;
         /**
          * festivalId : 34
@@ -49,7 +49,7 @@ public class Classify implements Serializable{
             this.festivals = festivals;
         }
 
-        public static class FestivalsBean {
+        public static class FestivalsBean implements Serializable{
             private int festivalId;
             private String festivalName;
 

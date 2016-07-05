@@ -2,18 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
     android:orientation="vertical">
+
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/tv_other"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="全球电影奖项"
+        android:gravity="center"
+        android:text="15464"
         android:textColor="@android:color/black"
         android:textSize="18sp" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recylerview"
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
 </LinearLayout>

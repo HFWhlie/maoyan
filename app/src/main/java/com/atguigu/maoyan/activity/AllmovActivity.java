@@ -32,6 +32,7 @@ import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -301,12 +302,13 @@ public class AllmovActivity extends Activity implements View.OnClickListener {
 
         if (i == 9) {//全部电影奖项
             final Classify classify = new Gson().fromJson(response, Classify.class);
+            final List<Classify.DataBean> data = classify.getData();
             ll_allmovie.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(context, KnobActivity.class);
                     Bundle bundle = new Bundle();
-                    bundle.putSerializable("list", classify);
+                    bundle.putSerializable("key", (Serializable) data);
                     intent.putExtras(bundle);
                     context.startActivity(intent);
 

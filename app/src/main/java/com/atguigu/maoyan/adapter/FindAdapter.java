@@ -115,10 +115,10 @@ public class FindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     .error(R.drawable.background_icon01)
                     .into(((TwoHolder) holder).iv2);
             Glide.with(context).load(feedslist.get(position).getImages().get(2).getUrl())
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)//图片的缓存
-                    .placeholder(R.drawable.background_icon01)//加载过程中的图片
-                    .error(R.drawable.background_icon01)//加载失败的时候显示的图片
-                    .into(((TwoHolder) holder).iv3);//请求成功后把图片设置到的控件
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .placeholder(R.drawable.background_icon01)
+                    .error(R.drawable.background_icon01)
+                    .into(((TwoHolder) holder).iv3);
         }
 
         if (getItemViewType(position) == FOUR) {
@@ -128,10 +128,10 @@ public class FindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             ((FourHolder) holder).tv_match.setText(feedslist.get(position).getCommentCount() + "");
 
             Glide.with(context).load(feedslist.get(position).getImages().get(0).getUrl())
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)//图片的缓存
-                    .placeholder(R.drawable.background_icon01)//加载过程中的图片
-                    .error(R.drawable.background_icon01)//加载失败的时候显示的图片
-                    .into(((FourHolder) holder).iv_icon);//请求成功后把图片设置到的控件
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .placeholder(R.drawable.background_icon01)
+                    .error(R.drawable.background_icon01)
+                    .into(((FourHolder) holder).iv_icon);
         }
 
         if (getItemViewType(position) == SEV) {
@@ -141,10 +141,10 @@ public class FindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             ((SevenHolder) holder).tv_match.setText(feedslist.get(position).getCommentCount() + "");
 
             Glide.with(context).load(feedslist.get(position).getImages().get(0).getUrl())
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)//图片的缓存
-                    .placeholder(R.drawable.background_icon01)//加载过程中的图片
-                    .error(R.drawable.background_icon01)//加载失败的时候显示的图片
-                    .into(((SevenHolder) holder).iv_icon);//请求成功后把图片设置到的控件
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .placeholder(R.drawable.background_icon01)
+                    .error(R.drawable.background_icon01)
+                    .into(((SevenHolder) holder).iv_icon);
         }
 
         if (getItemViewType(position) == EIG) {
