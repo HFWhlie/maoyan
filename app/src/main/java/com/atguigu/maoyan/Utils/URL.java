@@ -94,4 +94,7 @@ public class URL {
     public static final String privce4url = "http://i.meituan.com/firework/CivilWarcat?f=android&userid=-1&pushToken=8568be797789152f60d193cec511b9d2c01ebd1e6da38efbd62611e87b213090103b4d6d4a8cb7a6cd70f822f26ffff9&cityId=1";
     public static final String privce5url = "http://m.maoyan.com/store/topicDetail/200000039?_v_=yes&f=android&userid=-1&pushToken=8568be797789152f60d193cec511b9d2c01ebd1e6da38efbd62611e87b213090103b4d6d4a8cb7a6cd70f822f26ffff9&cityId=1";
     public static final String privce6url = "http://m.maoyan.com/store/topicDetail/300000050?_v_=yes&f=android&userid=-1&pushToken=8568be797789152f60d193cec511b9d2c01ebd1e6da38efbd62611e87b213090103b4d6d4a8cb7a6cd70f822f26ffff9&cityId=1";
+    //发现H5页面的接口//targetId
+    public static final String findfive ="http://m.maoyan.com/information/12498?_v_=yes";
+
 }

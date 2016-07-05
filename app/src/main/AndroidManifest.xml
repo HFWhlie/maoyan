@@ -89,7 +89,7 @@
         <activity android:name=".activity.KnobActivity" />
         <activity android:name=".activity.ShopActivity" />
         <activity android:name=".activity.ShopPagerActivity" />
-        <activity android:name="droid.Activity01"/>
+        <activity android:name="droid.Activity01" />
 
         <service
             android:name="com.baidu.location.f"
@@ -100,13 +100,13 @@
                     android:name="com.baidu.location.service"
                     android:exported="false" />
             </intent-filter>
-
         </service>
 
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="k86IXDVI8MMsCyrD4McM7mBGjpZWXBx1" />
 
+        <activity android:name=".activity.CartActivity"></activity>
     </application>
 
 </manifest>

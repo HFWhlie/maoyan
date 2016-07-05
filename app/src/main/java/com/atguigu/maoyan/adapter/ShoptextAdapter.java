@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.atguigu.maoyan.R;
+import com.atguigu.maoyan.Utils.CartProvider;
+import com.atguigu.maoyan.bean.ShoppingCart;
 import com.atguigu.maoyan.bean.Shumabean;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -22,9 +24,12 @@ public class ShoptextAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private Context context;
     private List<Shumabean.DataBean.ListBean> list;
 
+    private CartProvider cartProvider;
+
     public ShoptextAdapter(Context context, List<Shumabean.DataBean.ListBean> list) {
         this.context = context;
         this.list = list;
+        cartProvider = new CartProvider(context);
     }
 
     @Override
@@ -64,6 +69,15 @@ public class ShoptextAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             tv = (TextView) view.findViewById(R.id.tv);
             tv_price = (TextView) view.findViewById(R.id.tv_price);
             tv_preprice = (TextView) view.findViewById(R.id.tv_preprice);
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Shumabean.DataBean.ListBean listBean = list.get(getLayoutPosition());
+                    ShoppingCart shopCar = cartProvider.conversion(listBean);
+                    cartProvider.addData(shopCar);
+                }
+            });
         }
     }
 }

@@ -1,6 +1,8 @@
 package com.atguigu.maoyan.fregrament;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
@@ -26,6 +28,7 @@ import android.widget.Toast;
 import com.atguigu.maoyan.R;
 import com.atguigu.maoyan.Utils.URL;
 import com.atguigu.maoyan.activity.HotHfive;
+import com.atguigu.maoyan.activity.MainActivity;
 import com.atguigu.maoyan.adapter.CinemaAdapter;
 import com.atguigu.maoyan.bean.Citybean;
 import com.google.gson.Gson;
@@ -35,6 +38,7 @@ import com.zhy.http.okhttp.callback.StringCallback;
 import java.util.ArrayList;
 import java.util.List;
 
+import droid.Activity01;
 import okhttp3.Request;
 
 /**
@@ -60,6 +64,7 @@ public class CinemaFregrament extends BaseFregrament implements View.OnClickList
     private TextView tv_adress;
     private Citybean.DataBean data;
     private TextView tv_city;
+    private RelativeLayout rl_radiogroup;
 
     public CinemaFregrament(Context context) {
         super(context);
@@ -86,38 +91,42 @@ public class CinemaFregrament extends BaseFregrament implements View.OnClickList
         tv_adress = (TextView) view.findViewById(R.id.tv_adress);
         tv_city = (TextView) view.findViewById(R.id.tv_city);
 
+        rl_radiogroup = (RelativeLayout) view.findViewById(R.id.rl_radiogroup);
+
+        rl_radiogroup.setVisibility(View.GONE);
+
     }
 
     private void setlistener() {
         ll_show.setOnClickListener(this);
         iv_cityseach.setOnClickListener(this);
         iv_seach.setOnClickListener(this);
-//        ((MainActivity)context).setOnlistener(new MainActivity.Onlistener() {
-//
-//            @Override
-//            public void onclicklistener(final String key) {
-//                String text = (String) tv_city.getText();
-//                if (text.equals(key)) {
-//                    tv_city.setText(key);
-//                } else {
-//                    new AlertDialog.Builder(context)
-//                            .setTitle("定位到你当前的城市是北京，是否切换")
-//                            .setNegativeButton("取消", null)
-//                            .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-//                                @Override
-//                                public void onClick(DialogInterface dialog, int which) {
-//                                    tv_city.setText(key);
-//                                }
-//                            })
-//                            .show();
-//                }
-//            }
-//        });
+        ll_city.setOnClickListener(this);
+        ((MainActivity) context).setOnlistener(new MainActivity.Onlistener() {
+
+            @Override
+            public void onclicklistener(final String key) {
+                String text = (String) tv_city.getText();
+                if (text.equals(key)) {
+                    tv_city.setText(key);
+                } else {
+                    new AlertDialog.Builder(context)
+                            .setTitle("定位到你当前的城市是北京，是否切换")
+                            .setNegativeButton("取消", null)
+                            .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    tv_city.setText(key);
+                                }
+                            })
+                            .show();
+                }
+            }
+        });
     }
 
     @Override
     public void initData() {
-
         cinemaurl = URL.cinemaurl;
         getFromNetData();
     }
@@ -213,10 +222,8 @@ public class CinemaFregrament extends BaseFregrament implements View.OnClickList
                 break;
 
             case R.id.ll_city://城市选择
-//                Intent intent = new Intent(context, Activity01.class);
-//                ((MainActivity) context).startActivityForResult(intent, 1);
-
-                Toast.makeText(context,"北京",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(context, Activity01.class);
+                ((MainActivity) context).startActivityForResult(intent, 1);
                 break;
             case R.id.iv_cityseach://城市搜索
                 showpopupWindow();

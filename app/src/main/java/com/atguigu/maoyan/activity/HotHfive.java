@@ -97,6 +97,12 @@ public class HotHfive extends Activity implements View.OnClickListener {
                 String privce3url = URL.privce3url;
                 webview.loadUrl(privce3url);
                 break;
+            case 10:
+                String title = getIntent().getStringExtra("title");
+                String findfive = URL.findfive;
+                tv_name.setText(title);
+                webview.loadUrl(findfive);
+                break;
         }
         settings = webview.getSettings();
         settings.setJavaScriptEnabled(true);

@@ -48,6 +48,9 @@ public class MovieFregrament extends BaseFregrament implements View.OnClickListe
     //两点之间的距离
     private int left;
     private Movieadapter adapter;
+    private TextView tv_cinma;
+    private ImageView iv_cityseach;
+    private ImageView iv_seach;
     //当前页面的viewpager
 
     public MovieFregrament(Context context) {
@@ -64,7 +67,6 @@ public class MovieFregrament extends BaseFregrament implements View.OnClickListe
 
     private void setListener() {
         ll_city.setOnClickListener(this);
-
         ((MainActivity) context).setOnlistener(new MainActivity.Onlistener() {
 
             @Override
@@ -90,6 +92,7 @@ public class MovieFregrament extends BaseFregrament implements View.OnClickListe
     }
 
     private void findView() {
+        tv_cinma = (TextView) view.findViewById(R.id.tv_cinma);
         rg_title = (RadioGroup) view.findViewById(R.id.rg_title);
         movie_viewpager = (ViewPager) view.findViewById(R.id.movie_viewpager);
         iv_whilt = (ImageView) view.findViewById(R.id.iv_whilt);
@@ -98,6 +101,13 @@ public class MovieFregrament extends BaseFregrament implements View.OnClickListe
         rb_stdy_show = (RadioButton) view.findViewById(R.id.rb_stdy_show);
         rb_overseas = (RadioButton) view.findViewById(R.id.rb_overseas);
         tv_city = (TextView) view.findViewById(R.id.tv_city);
+
+        iv_cityseach = (ImageView) view.findViewById(R.id.iv_cityseach);
+        iv_seach = (ImageView) view.findViewById(R.id.iv_seach);
+
+        tv_cinma.setVisibility(View.GONE);
+        iv_seach.setVisibility(View.GONE);
+        iv_cityseach.setVisibility(View.GONE);
 
     }
 

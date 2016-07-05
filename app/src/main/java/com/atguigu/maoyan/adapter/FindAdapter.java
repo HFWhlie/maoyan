@@ -406,6 +406,15 @@ public class FindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             iv1 = (ImageView) view.findViewById(R.id.iv1);
             iv2 = (ImageView) view.findViewById(R.id.iv2);
             iv3 = (ImageView) view.findViewById(R.id.iv3);
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(onitemListener != null) {
+                        onitemListener.onitemListener(v,getLayoutPosition());
+                    }
+                }
+            });
         }
     }
 
@@ -426,6 +435,16 @@ public class FindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             tv_zuan = (TextView) view.findViewById(R.id.tv_zuan);
             tv_match = (TextView) view.findViewById(R.id.tv_match);
             iv_icon = (ImageView) view.findViewById(R.id.iv_icon);
+
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(onitemListener != null) {
+                        onitemListener.onitemListener(v,getLayoutPosition());
+                    }
+                }
+            });
         }
     }
 
@@ -446,6 +465,16 @@ public class FindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             tv_zuan = (TextView) view.findViewById(R.id.tv_zuan);
             tv_match = (TextView) view.findViewById(R.id.tv_match);
             iv_icon = (ImageView) view.findViewById(R.id.iv_icon);
+
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(onitemListener != null) {
+                        onitemListener.onitemListener(v,getLayoutPosition());
+                    }
+                }
+            });
         }
     }
 
@@ -473,6 +502,25 @@ public class FindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             iv1 = (ImageView) view.findViewById(R.id.iv1);
             iv2 = (ImageView) view.findViewById(R.id.iv2);
             iv3 = (ImageView) view.findViewById(R.id.iv3);
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(onitemListener != null) {
+                        onitemListener.onitemListener(v,getLayoutPosition());
+                    }
+                }
+            });
         }
+    }
+
+    public interface OnitemListener {
+        public void onitemListener(View v, int layoutPosition);
+    }
+
+    public OnitemListener onitemListener;
+
+    public void setOnitemListener(OnitemListener onitemListener) {
+        this.onitemListener = onitemListener;
     }
 }

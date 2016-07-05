@@ -11,11 +11,11 @@
         android:orientation="horizontal">
 
         <TextView
-            android:layout_marginLeft="10dp"
             android:id="@+id/tv_city"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
             android:text="北京"
             android:textColor="@android:color/white"
             android:textSize="18sp" />
@@ -29,6 +29,7 @@
     </LinearLayout>
 
     <RelativeLayout
+        android:id="@+id/rl_radiogroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
@@ -63,6 +64,33 @@
 
         </RadioGroup>
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_cinma"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="影院"
+        android:textColor="@android:color/white"
+        android:textSize="18sp" />
+
+    <ImageView
+        android:id="@+id/iv_cityseach"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="50dp"
+        android:src="@drawable/u_" />
+
+    <ImageView
+        android:id="@+id/iv_seach"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/ic_search" />
 
 
 </RelativeLayout>

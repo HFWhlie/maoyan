@@ -1,6 +1,7 @@
 package com.atguigu.maoyan.fregrament;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +13,7 @@ import android.widget.ProgressBar;
 
 import com.atguigu.maoyan.R;
 import com.atguigu.maoyan.Utils.URL;
+import com.atguigu.maoyan.activity.HotHfive;
 import com.atguigu.maoyan.adapter.FindAdapter;
 import com.atguigu.maoyan.bean.Findbean;
 import com.cjj.MaterialRefreshLayout;
@@ -139,5 +141,16 @@ public class FindFregrament extends BaseFregrament {
         rl_find.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
         adapter = new FindAdapter(context, feeds);
         rl_find.setAdapter(adapter);
+
+        adapter.setOnitemListener(new FindAdapter.OnitemListener() {
+            @Override
+            public void onitemListener(View v, int layoutPosition) {
+                Intent intent = new Intent(context, HotHfive.class);
+                String title = feeds.get(layoutPosition).getTitle();
+                intent.putExtra("title", title);
+                intent.setFlags(10);
+                context.startActivity(intent);
+            }
+        });
     }
 }

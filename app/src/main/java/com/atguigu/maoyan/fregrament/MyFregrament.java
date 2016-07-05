@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.atguigu.maoyan.R;
+import com.atguigu.maoyan.activity.CartActivity;
 import com.atguigu.maoyan.activity.LoginActivity;
 import com.atguigu.maoyan.activity.ShopActivity;
 
@@ -107,6 +108,8 @@ public class MyFregrament extends BaseFregrament implements View.OnClickListener
             case R.id.rl_login:
                 context.startActivity(new Intent(context, LoginActivity.class));
                 break;
+            case R.id.rl_all:
+                context.startActivity(new Intent(context, CartActivity.class));
         }
     }
 }

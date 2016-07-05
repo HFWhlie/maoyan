@@ -8,7 +8,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <include layout="@layout/cinema_title" />
+        <include layout="@layout/movie_title" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rl_cinema"
