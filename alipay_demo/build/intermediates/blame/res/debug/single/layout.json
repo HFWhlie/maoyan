@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "F:\\maoyan\\alipay_demo\\build\\intermediates\\res\\merged\\debug\\layout\\pay_main.xml",
+        "source": "F:\\maoyan\\alipay_demo\\src\\main\\res\\layout\\pay_main.xml"
+    },
+    {
+        "merged": "F:\\maoyan\\alipay_demo\\build\\intermediates\\res\\merged\\debug\\layout\\pay_external.xml",
+        "source": "F:\\maoyan\\alipay_demo\\src\\main\\res\\layout\\pay_external.xml"
+    }
+]

@@ -1,1 +1,2 @@
-include ':app', ':okhttputils', ':xutils', ':MaterialRefreshLayout-library'
+include ':app', ':okhttputils', ':xutils', ':MaterialRefreshLayout-library', ':IndexRecyclerView'
+include ':alipay_demo'
