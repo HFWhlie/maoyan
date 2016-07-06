@@ -6,10 +6,21 @@ android {
 
     defaultConfig {
         applicationId "com.atguigu.maoyan"
-        minSdkVersion 17
+        minSdkVersion 14
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+        //参数说明
+        manifestPlaceholders = [
+                GETUI_APP_ID    : "7DM054VOHC7rZ5JLalGe56",
+                GETUI_APP_KEY   : "ubJ1vmcK2H6JDQqPo5ZCJ6",
+                GETUI_APP_SECRET: "4kpamp4Vjk7wZAvnp6RLF6",
+                PACKAGE_NAME    : applicationId
+        ]
+//APP_ID、APP_KEY、APP_SECRET请根据个推开发者后台申请到的应用参数进行相应替换
+        ndk {
+            abiFilters "armeabi", "armeabi-v7a", "arm64-v8a", "mips", "mips64", "x86", "x86_64"
+        }
     }
 
     sourceSets {
@@ -26,8 +37,8 @@ android {
 }
 
 
-repositories{
-    flatDir{
+repositories {
+    flatDir {
         dirs 'libs'
     }
 }
@@ -58,6 +69,9 @@ dependencies {
     compile files('libs/pinyin4android1.0.jar')
     compile files('libs/baidumapapi_v2_1_2.jar')
 
-    compile name:'SMSSDK-2.1.0',ext:'aar'
-    compile name:'SMSSDKGUI-2.1.0',ext:'aar'
+    compile name: 'SMSSDK-2.1.0', ext: 'aar'
+    compile name: 'SMSSDKGUI-2.1.0', ext: 'aar'
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.getui:sdk:2.9.0.0'
+    compile 'com.android.support:support-v4:+'
 }

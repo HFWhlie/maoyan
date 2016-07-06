@@ -23,6 +23,7 @@ import com.atguigu.maoyan.fregrament.CinemaFregrament;
 import com.atguigu.maoyan.fregrament.FindFregrament;
 import com.atguigu.maoyan.fregrament.MovieFregrament;
 import com.atguigu.maoyan.fregrament.MyFregrament;
+import com.igexin.sdk.PushManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +45,10 @@ public class MainActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        PushManager.getInstance().initialize(this.getApplicationContext());
+
+        String clientid = PushManager.getInstance().getClientid(this);
+        Log.e("TAG444",clientid);
 
         context = this;
         findView();
