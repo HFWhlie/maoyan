@@ -2,6 +2,7 @@ package com.atguigu.maoyan.pager.OverseasFregrament;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -12,7 +13,7 @@ import android.widget.ProgressBar;
 
 import com.atguigu.maoyan.R;
 import com.atguigu.maoyan.Utils.URL;
-import com.atguigu.maoyan.activity.HotHfive;
+import com.atguigu.maoyan.activity.SystemActivity;
 import com.atguigu.maoyan.adapter.RibenAdapter;
 import com.atguigu.maoyan.bean.Ribean;
 import com.atguigu.maoyan.fregrament.BaseFregrament;
@@ -109,10 +110,9 @@ public class RiFregrament extends BaseFregrament {
         adapter.setOnClickriitemlistener(new RibenAdapter.OnClickriitemlistener() {
             @Override
             public void onClickriitemlistener(View v, int layoutPosition) {
-                Intent intent = new Intent(context, HotHfive.class);
-                String nm = hotlist.get(layoutPosition).getNm();
-                intent.putExtra("key", nm);
-                intent.setFlags(0);
+                String videourl = hotlist.get(layoutPosition).getVideourl();
+                Intent intent = new Intent(context, SystemActivity.class);
+                intent.setDataAndType(Uri.parse(videourl), "video/*");
                 context.startActivity(intent);
             }
         });

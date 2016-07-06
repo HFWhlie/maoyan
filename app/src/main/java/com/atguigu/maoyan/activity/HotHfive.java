@@ -44,12 +44,6 @@ public class HotHfive extends Activity implements View.OnClickListener {
 
         int flags = getIntent().getFlags();
         switch (flags) {
-            case 0:
-                String key = getIntent().getStringExtra("key");
-                hot = URL.Hotfive;
-                webview.loadUrl(hot);
-                tv_name.setText(key);
-                break;
             case 1:
                 String value = getIntent().getStringExtra("key");
                 hot = URL.Hotfive;

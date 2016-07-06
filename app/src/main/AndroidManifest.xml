@@ -35,14 +35,11 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- SD卡读取权限，用户写入离线定位数据 -->
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
-
-
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
 
     <supports-screens
         android:anyDensity="true"
@@ -57,7 +54,9 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.MainActivity" />
+        <activity
+            android:name=".activity.MainActivity"
+            android:screenOrientation="portrait" />
         <activity android:name=".activity.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -104,15 +103,12 @@
         <activity android:name=".activity.ShopActivity" />
         <activity android:name=".activity.ShopPagerActivity" />
         <activity android:name="droid.Activity01" />
-
-
         <activity
             android:name="com.alipay.sdk.app.H5PayActivity"
             android:configChanges="orientation|keyboardHidden|navigation|screenSize"
             android:exported="false"
             android:screenOrientation="behind"
-            android:windowSoftInputMode="adjustResize|stateHidden" >
-        </activity>
+            android:windowSoftInputMode="adjustResize|stateHidden"></activity>
 
         <service
             android:name="com.baidu.location.f"
@@ -129,7 +125,11 @@
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="k86IXDVI8MMsCyrD4McM7mBGjpZWXBx1" />
 
-        <activity android:name=".activity.CartActivity"></activity>
+        <activity android:name=".activity.CartActivity" />
+        <activity
+            android:name=".activity.SystemActivity"
+            android:configChanges="keyboardHidden|screenSize|orientation"
+            android:screenOrientation="landscape" />
     </application>
 
 </manifest>

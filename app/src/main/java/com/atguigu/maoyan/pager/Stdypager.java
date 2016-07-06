@@ -2,6 +2,7 @@ package com.atguigu.maoyan.pager;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,7 +14,7 @@ import android.widget.ProgressBar;
 
 import com.atguigu.maoyan.R;
 import com.atguigu.maoyan.Utils.URL;
-import com.atguigu.maoyan.activity.HotHfive;
+import com.atguigu.maoyan.activity.SystemActivity;
 import com.atguigu.maoyan.adapter.StdyAdapter;
 import com.atguigu.maoyan.bean.Stdybean;
 import com.cjj.MaterialRefreshLayout;
@@ -149,12 +150,20 @@ public class Stdypager extends Basepager {
         adapter.setOnStdylistener(new StdyAdapter.OnStdylistener() {
             @Override
             public void onstdyonclicklistener(View v, int layoutPosition) {
-                Intent intent = new Intent(context, HotHfive.class);
-                String nm = cominglist.get(layoutPosition-1).getNm();
-                intent.putExtra("stdy", nm);
-                intent.setFlags(2);
+                //启动
+//                Intent intent = new Intent(context, HotHfive.class);
+//                String nm = cominglist.get(layoutPosition-1).getNm();
+//                intent.putExtra("stdy", nm);
+//                intent.setFlags(2);
+//                context.startActivity(intent);
+                //启动播放器
+                String videourl = cominglist.get(layoutPosition).getVideourl();
+                Intent intent = new Intent(context, SystemActivity.class);
+                intent.setDataAndType(Uri.parse(videourl), "video/*");
                 context.startActivity(intent);
+
             }
         });
+
     }
 }
