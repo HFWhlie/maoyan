@@ -25,6 +25,13 @@ android {
     }
 }
 
+
+repositories{
+    flatDir{
+        dirs 'libs'
+    }
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
@@ -50,4 +57,7 @@ dependencies {
     compile files('libs/pinyin4j-2.5.0.jar')
     compile files('libs/pinyin4android1.0.jar')
     compile files('libs/baidumapapi_v2_1_2.jar')
+
+    compile name:'SMSSDK-2.1.0',ext:'aar'
+    compile name:'SMSSDKGUI-2.1.0',ext:'aar'
 }

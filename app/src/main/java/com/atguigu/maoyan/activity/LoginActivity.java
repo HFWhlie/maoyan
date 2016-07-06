@@ -22,6 +22,9 @@ import cn.sharesdk.sina.weibo.SinaWeibo;
 import cn.sharesdk.tencent.qq.QQ;
 import cn.sharesdk.tencent.qzone.QZone;
 import cn.sharesdk.wechat.friends.Wechat;
+import cn.smssdk.EventHandler;
+import cn.smssdk.SMSSDK;
+import cn.smssdk.gui.RegisterPage;
 
 public class LoginActivity extends Activity implements View.OnClickListener {
     private Context context;
@@ -32,6 +35,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     private ImageView iv_xinlang;
     private ImageView iv_kongjian;
     private EditText et_name;
+    private ImageView iv_back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +51,8 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         iv_qq.setOnClickListener(this);
         iv_xinlang.setOnClickListener(this);
         iv_kongjian.setOnClickListener(this);
+        iv_back.setOnClickListener(this);
+        tv_mt.setOnClickListener(this);
     }
 
     private void findView() {
@@ -57,6 +63,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         iv_xinlang = (ImageView) findViewById(R.id.iv_xinlang);
         iv_kongjian = (ImageView) findViewById(R.id.iv_kongjian);
         et_name = (EditText) findViewById(R.id.et_name);
+        iv_back = (ImageView) findViewById(R.id.iv_back);
 
 
     }
@@ -192,6 +199,29 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
             case R.id.iv_back:
                 finish();
+                break;
+
+
+            case R.id.tv_mt:
+                SMSSDK.initSDK(this, "14a43bbdf5828", "c3fc450738fcc8bf17989fdb84c5deab");
+
+                //打开注册页面
+                RegisterPage registerPage = new RegisterPage();
+                registerPage.setRegisterCallback(new EventHandler() {
+                    public void afterEvent(int event, int result, Object data) {
+                        // 解析注册结果
+                        if (result == SMSSDK.RESULT_COMPLETE) {
+                            @SuppressWarnings("unchecked")
+                            HashMap<String, Object> phoneMap = (HashMap<String, Object>) data;
+                            String country = (String) phoneMap.get("country");
+                            String phone = (String) phoneMap.get("phone");
+                            Log.e("TAG", "country---" + country + "phone===" + phone);
+                            // 提交用户信息
+//                            registerUser(country, phone);
+                        }
+                    }
+                });
+                registerPage.show(context);
                 break;
         }
     }
